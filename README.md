@@ -1,4 +1,5 @@
 # Projet 6 - Réalisez une analyse de sentiments grâce au Deep Learning
+
 > 🎓 OpenClassrooms • Parcours [AI Engineer](https://openclassrooms.com/fr/paths/795-ai-engineer) | 👋 *Étudiant* : [David Scanu](https://www.linkedin.com/in/davidscanu14/)
 
 ## 📝 Contexte
@@ -7,6 +8,9 @@ Dans le cadre de ma formation d'AI Engineer chez OpenClassrooms, ce projet s'ins
 Notre client, Air Paradis (compagnie aérienne), souhaite anticiper les bad buzz sur les réseaux sociaux. La mission consiste à développer un produit IA permettant de prédire le sentiment associé à un tweet, afin d'améliorer la gestion de sa réputation en ligne.
 
 ## ⚡ Mission
+
+> Développer un modèle d'IA permettant de prédire le sentiment associé à un tweet.
+
 Créer un prototype fonctionnel d'un modèle d'analyse de sentiments pour tweets selon trois approches différentes :
 
 1. **Modèle sur mesure simple** : Approche classique (régression logistique) pour une prédiction rapide
@@ -14,13 +18,16 @@ Créer un prototype fonctionnel d'un modèle d'analyse de sentiments pour tweets
 3. **Modèle avancé BERT** : Exploration de l'apport en performance d'un modèle BERT
 
 Cette mission implique également la mise en œuvre d'une démarche MLOps complète :
-- Utilisation de MLFlow pour le tracking des expérimentations et le stockage des modèles
-- Création d'un pipeline de déploiement continu (Git + Github + plateforme Cloud)
-- Intégration de tests unitaires automatisés
-- Mise en place d'un suivi de performance en production via Azure Application Insight
+
+- Utilisation de **MLFlow pour le tracking des expérimentations et le stockage des modèles**.
+- Création d'un pipeline de déploiement continu (Git + Github + plateforme Cloud).
+- Intégration de tests unitaires automatisés.
+- Mise en place d'un suivi de performance en production via Azure Application Insight.
 
 ## 🎯 Objectifs pédagogiques
+
 Durant ce projet, je vais :
+
 - **Développer des modèles IA** pour la prédiction de sentiment à partir de données textuelles
 - **Mettre en pratique des méthodologies MLOps** pour le déploiement et la gestion continue des modèles
 - **Mettre en œuvre un pipeline CI/CD** intégrant des tests unitaires automatisés
@@ -31,6 +38,7 @@ Durant ce projet, je vais :
 Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me permettant de gérer des projets complexes et de délivrer des solutions robustes en environnement réel.
 
 ## 🗓️ Plan de travail
+
 1. **Exploration et préparation des données**
    - Acquisition des données de tweets Open Source
    - Analyse exploratoire et prétraitement des textes

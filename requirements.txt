@@ -1,0 +1,10 @@
+pandas
+jupyter
+notebook
+numpy
+matplotlib
+seaborn
+scikit-learn
+nltk 
+wordcloud
+langdetect
