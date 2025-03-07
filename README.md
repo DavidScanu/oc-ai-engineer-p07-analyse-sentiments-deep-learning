@@ -1,4 +1,4 @@
-# Projet 6 - Réalisez une analyse de sentiments grâce au Deep Learning
+# Projet 7 - Réalisez une analyse de sentiments grâce au Deep Learning
 
 > 🎓 OpenClassrooms • Parcours [AI Engineer](https://openclassrooms.com/fr/paths/795-ai-engineer) | 👋 *Étudiant* : [David Scanu](https://www.linkedin.com/in/davidscanu14/)
 
