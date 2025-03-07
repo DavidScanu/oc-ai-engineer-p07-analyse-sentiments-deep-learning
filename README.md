@@ -66,6 +66,7 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
    - Préparation du support de présentation
 
 ## 📦 Livrables
+
 1. **API de prédiction** déployée sur Heroku
    - Exposant le "Modèle sur mesure avancé" via FastAPI
    - Lien: [API Prediction Air Paradis](https://lien-vers-api.herokuapp.com)
@@ -96,6 +97,7 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
    - Captures d'écran du monitoring Application Insight
 
 ## 🔧 Technologies utilisées
+
 - **Langages** : Python
 - **Bibliothèques ML/DL** : Scikit-learn, TensorFlow/Keras, Transformers (BERT)
 - **MLOps** : MLFlow, Git, GitHub Actions
@@ -105,6 +107,7 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 - **Traitement texte** : NLTK/SpaCy, Word Embeddings
 
 ## 📃 Documentation
+
 - [Guide d'utilisation de l'API](docs/api_guide.md)
 - [Description détaillée des modèles](docs/models.md)
 - [Implémentation MLOps](docs/mlops.md)
