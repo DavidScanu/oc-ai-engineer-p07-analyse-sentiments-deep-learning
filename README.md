@@ -117,8 +117,11 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 
 ```bash
 # Cloner le dépôt
-git clone https://github.com/DavidScanu/oc-ai-engineer-p06-analyse-sentiments-deep-learning.git
-cd oc-ai-engineer-p06-analyse-sentiments-deep-learning
+git clone git@github.com:DavidScanu/oc-ai-engineer-p07-analyse-sentiments-deep-learning.git
+cd oc-ai-engineer-p07-analyse-sentiments-deep-learning
+
+# Créer un environnement virtuel 
+source .venv/bin/activate
 
 # Installer les dépendances
 pip install -r requirements.txt
