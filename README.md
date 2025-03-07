@@ -116,7 +116,7 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 
 ## 🔄 Installation et utilisation
 
-### Prérequis
+Pour copier et installer le projet en local :
 
 ```bash
 # Cloner le dépôt
@@ -128,7 +128,34 @@ source .venv/bin/activate
 
 # Installer les dépendances
 pip install -r requirements.txt
+```
 
+Pour configurer MLFlow dans le code Python : 
+
+Créer un fichier `.env` à la racine du projet contenant les variables de configuration du serveur MLFlow : 
+- `MLFLOW_TRACKING_URI`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+
+```python
+import mlflow
+from dotenv import load_dotenv
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv()
+
+# Configuration de MLflow avec les variables d'environnement
+mlflow_tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
+aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
+
+# Configuration de MLflow
+mlflow.set_tracking_uri(mlflow_tracking_uri)
+```
+
+Pour lancer les serveurs de l'API et du frontend en local : 
+
+```bash
 # Lancer l'API FastAPI en local
 uvicorn api.main:app --reload
 
