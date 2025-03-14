@@ -11,3 +11,4 @@ langdetect
 mlflow
 boto3
 python-dotenv
+tabulate
