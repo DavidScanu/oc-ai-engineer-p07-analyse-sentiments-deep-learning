@@ -1,4 +1,6 @@
 content/
+content/pretrained-embeddings/
+content/pretrained-embeddings/*
 
 
 # Byte-compiled / optimized / DLL files
