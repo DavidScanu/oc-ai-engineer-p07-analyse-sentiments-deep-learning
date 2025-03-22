@@ -14,3 +14,4 @@ python-dotenv
 tabulate
 tensorflow[and-cuda]
 gensim
+dill
