@@ -102,8 +102,6 @@ app = FastAPI(
 )
 
 
-
-
 # Modèle de données pour les requêtes
 class TweetRequest(BaseModel):
     text: str
@@ -326,6 +324,7 @@ def predict_sentiment(text: str, model_pack: Dict[str, Any]) -> Dict[str, Any]:
         logger.error(f"Erreur lors de la prédiction: {str(e)}")
         raise
 
+# Fonction pour prédire le sentiment d'un lot de textes
 def predict_sentiment_batch(texts: List[str], model_pack: Dict[str, Any]) -> List[Dict[str, Any]]:
     """
     Prédit le sentiment d'une liste de textes en utilisant le modèle chargé.
