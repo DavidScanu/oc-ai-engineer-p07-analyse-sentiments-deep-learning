@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  api:
+    build: 
+      context: ./fastapi
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./fastapi/model:/app/model
+    restart: unless-stopped
+    environment:
+      - MLFLOW_TRACKING_URI=${MLFLOW_TRACKING_URI}
+      - RUN_ID=${RUN_ID}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+
+  # Service frontend à ajouter plus tard
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - api

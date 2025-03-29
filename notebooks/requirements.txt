@@ -15,8 +15,6 @@ tabulate
 tensorflow[and-cuda]
 gensim
 dill
-torch
-transformers
 plotly
 tqdm 
 requests
