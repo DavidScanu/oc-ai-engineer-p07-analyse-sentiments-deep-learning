@@ -1,7 +1,7 @@
 content/
 content/pretrained-embeddings/
 content/pretrained-embeddings/*
-
+app/fastapi/model/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
