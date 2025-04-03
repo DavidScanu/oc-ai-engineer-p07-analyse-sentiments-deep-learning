@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import FeedbackForm from './FeedbackForm'
 
 export default function ResultCard({ result, tweetText = '' }) {
   const [animate, setAnimate] = useState(false)
@@ -66,8 +65,25 @@ export default function ResultCard({ result, tweetText = '' }) {
           </div>
         </div>
         
-        {/* Intégration du composant FeedbackForm */}
-        <FeedbackForm tweetText={tweetText} prediction={result} />
+        <div className="mt-4 border-top pt-3">
+          <h5 className="mb-3">Cette prédiction est-elle correcte?</h5>
+          <div className="d-flex">
+            <button 
+              className="btn btn-outline-success me-2" 
+              onClick={() => console.log('Feedback positif', { tweet: tweetText, result })}
+            >
+              <i className="bi bi-hand-thumbs-up me-1"></i>
+              Oui, c'est correct
+            </button>
+            <button 
+              className="btn btn-outline-danger" 
+              onClick={() => console.log('Feedback négatif', { tweet: tweetText, result })}
+            >
+              <i className="bi bi-hand-thumbs-down me-1"></i>
+              Non, c'est incorrect
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   )

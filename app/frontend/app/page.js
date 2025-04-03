@@ -11,13 +11,18 @@ export default function Home() {
       <div className="container py-5">
         <div className="row justify-content-center">
           <div className="col-md-10 col-lg-8">
-            <div className="text-center mb-5">
+
+
+            <div className="text-center mb-3">
+              <div className='main-cover mb-3'>
+                <img src="tweet-cover.png" alt="Cover" className="img-fluid" />
+              </div>
               <h1 className="display-5 fw-bold text-primary">Analyse de Sentiment pour Tweets</h1>
               <p className="lead text-secondary">
                 Entrez un tweet et découvrez s'il est perçu comme positif ou négatif grâce à notre modèle d'IA
               </p>
             </div>
-            
+
             <TweetForm />
             
             <div className="mt-5 text-center">

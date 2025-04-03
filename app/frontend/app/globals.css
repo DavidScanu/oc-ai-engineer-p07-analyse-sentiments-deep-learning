@@ -13,10 +13,6 @@ body {
   margin: 0;
 }
 
-.tweet-form {
-  max-width: 600px;
-  margin: 0 auto;
-}
 
 .result-card {
   transition: all 0.3s ease;
