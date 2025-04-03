@@ -165,16 +165,18 @@ streamlit run frontend/app.py
 ```
 
 ### Structure du projet
+
 ```
-oc-ai-engineer-p06-analyse-sentiments-deep-learning/
-├── api/                # Code de l'API FastAPI
-├── frontend/           # Interface utilisateur (Streamlit ou Next.js)
-├── data/               # Données de tweets
-├── models/             # Modèles entraînés
-├── notebooks/          # Notebooks d'expérimentation
-├── mlflow/             # Configuration MLFlow
-├── tests/              # Tests unitaires
-├── .github/workflows/  # Configuration GitHub Actions
-├── requirements.txt    # Dépendances
-└── README.md           # Documentation
+📦 air-paradis-sentiment-analysis/
+┣━━ 📂 app/
+┃   ┣━━ 📂 fastapi/                         # Backend API de prédiction
+┃   ┗━━ 📂 frontend/                        # Application Next.js
+┃
+┣━━ 📂 documentation/                       # Documentation du projet
+┃
+┗━━ 📂 notebooks/                           # Notebooks Jupyter pour l'analyse et modèles
+    ┣━━ 📄 01_Analyse_exploratoire.ipynb     # Exploration et visualisation des données
+    ┣━━ 📄 02_Modele_simple.ipynb            # Bag of Words et classificateurs classiques
+    ┣━━ 📄 03_Modele_avance_Word2Vec.ipynb   # LSTM avec Word2Vec
+    ┗━━ 📄 04_Modele_BERT.ipynb              # DistilBERT pour analyse de sentiment
 ```

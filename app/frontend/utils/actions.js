@@ -1,0 +1,123 @@
+'use server'
+
+// Action pour prédire le sentiment d'un tweet
+export async function predictSentiment(text) {
+  try {
+    // Configuration de la requête vers l'API FastAPI
+    const response = await fetch('http://localhost:8000/predict', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text }),
+      cache: 'no-store',
+    })
+
+    // Vérifier si la requête a réussi
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(`Erreur API: ${errorData.detail || response.statusText}`)
+    }
+
+    // Récupérer et retourner les données
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error('Erreur lors de la prédiction:', error)
+    throw new Error(`Échec de la prédiction: ${error.message}`)
+  }
+}
+
+// Action pour prédire le sentiment de plusieurs tweets (batch)
+export async function predictSentimentBatch(texts) {
+  try {
+    const response = await fetch('http://localhost:8000/predict-batch', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ texts }),
+      cache: 'no-store',
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(`Erreur API: ${errorData.detail || response.statusText}`)
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error('Erreur lors de la prédiction par lot:', error)
+    throw new Error(`Échec de la prédiction par lot: ${error.message}`)
+  }
+}
+
+// Action pour vérifier la santé de l'API
+export async function checkApiHealth() {
+  try {
+    const response = await fetch('http://localhost:8000/health', {
+      cache: 'no-store',
+    })
+    
+    return {
+      status: response.ok,
+      data: await response.json()
+    }
+  } catch (error) {
+    return {
+      status: false,
+      error: error.message
+    }
+  }
+}
+
+// Action pour envoyer le feedback utilisateur
+export async function sendUserFeedback(feedback) {
+  try {
+    // Dans une implémentation réelle, vous enverriez ces données à
+    // Application Insights ou à votre propre endpoint
+    console.log('Envoi de feedback:', feedback)
+    
+    // Simulation d'un envoi de données réussi
+    return { 
+      success: true,
+      message: 'Feedback enregistré avec succès'
+    }
+    
+    // Dans une application réelle, vous pourriez avoir quelque chose comme:
+    /*
+    const response = await fetch('http://localhost:8000/feedback', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(feedback),
+    })
+    
+    if (!response.ok) {
+      throw new Error('Erreur lors de l\'envoi du feedback')
+    }
+    
+    return await response.json()
+    */
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi du feedback:', error)
+    return {
+      success: false,
+      error: error.message
+    }
+  }
+}
+
+// Action pour récupérer des statistiques de modèle (fictif pour la démo)
+export async function getModelStats() {
+  // Dans une implémentation réelle, ces données viendraient de votre API
+  return {
+    totalPredictions: 12483,
+    accuracy: 0.876,
+    positiveTweets: 7629,
+    negativeTweets: 4854,
+    averageConfidence: 0.83,
+    lastUpdated: new Date().toISOString()
+  }
+}
