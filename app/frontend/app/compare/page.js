@@ -56,7 +56,7 @@ export default function ComparePage() {
       <BootstrapClient />
       <div className="container py-5">
         <div className="row justify-content-center">
-          <div className="col-lg-10">
+          <div className="col-lg-8">
             <h1 className="display-5 fw-bold text-primary mb-4">Comparaison de Tweets</h1>
             <p className="lead">
               Comparez les sentiments de plusieurs tweets simultanément pour mieux comprendre les nuances
