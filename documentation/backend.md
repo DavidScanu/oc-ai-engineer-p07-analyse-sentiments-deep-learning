@@ -13,9 +13,9 @@ Cette API permet de prédire le sentiment (positif ou négatif) associé à un t
 
 ## Prérequis
 
-- Docker et Docker Compose
 - Accès à un serveur MLflow
 - Identifiants AWS si les artefacts sont stockés sur S3
+- Docker et Docker Compose
 
 ## Configuration
 
@@ -99,7 +99,16 @@ http://localhost:8000/docs
 ## Structure du projet
 
 - `main.py` : Code principal de l'API
+- `model/` : Dossier où sont stockés les artefacts du modèle téléchargés depuis MLflow
 - `Dockerfile` : Configuration pour la conteneurisation
 - `docker-compose.yml` : Configuration pour le déploiement avec Docker Compose
 - `requirements.txt` : Liste des dépendances
-- `model/` : Dossier où sont stockés les artefacts du modèle téléchargés depuis MLflow
+
+## MLOps
+
+Cette application implémente plusieurs principes de MLOps :
+- Suivi des expérimentations avec MLflow
+- API pour le déploiement du modèle
+- Tests automatisés (CI/CD)
+- Surveillance des performances du modèle via le système de feedback
+- Amélioration continue basée sur les retours utilisateurs

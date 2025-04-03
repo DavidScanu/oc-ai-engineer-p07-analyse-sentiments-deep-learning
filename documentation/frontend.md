@@ -1,6 +1,6 @@
-# Air Paradis - Analyse de Sentiment pour Tweets
+# Interface de Prédiction de Sentiment pour Tweets
 
-Cette application permet d'analyser le sentiment (positif/négatif) des tweets grâce à un modèle d'intelligence artificielle. Elle a été développée dans le cadre d'un projet MLOps pour la compagnie Air Paradis afin d'anticiper les bad buzz sur les réseaux sociaux.
+Cette interface utilisateur permet d'analyser le sentiment (positif/négatif) des tweets grâce à un modèle d'intelligence artificielle. Elle a été développée dans le cadre d'un projet MLOps pour la compagnie **Air Paradis** afin d'anticiper les bad buzz sur les réseaux sociaux.
 
 ## Architecture
 
@@ -28,45 +28,40 @@ L'application est composée de deux parties principales :
 - Python 3.8+
 - Environnement virtuel Python (recommandé)
 
-### Backend (FastAPI)
+### Configuration de .env.local
 
-1. Créer et activer un environnement virtuel
+Avant de lancer l'application Next.js, il est impératif de configurer un fichier `.env.local` et lui indiquer l'adresse de l'API du serveur de prédiction. 
+
+```
+# Configuration du backend
+NEXT_PUBLIC_API_URL=http://localhost:8000
+
+# Environnement (development, production)
+NODE_ENV=development
+```
+
+### Frontend (Next.js)
+
+Pour lancer l'interface utilisateur, il faut exectuer ces commandes :
+
+1. Se déplacer vous dans le répertoire : 
 ```bash
-python -m venv venv
-source venv/bin/activate  # Sur Windows : venv\Scripts\activate
+cd app/frontend/
 ```
 
 2. Installer les dépendances
 ```bash
-pip install -r requirements.txt
-```
-
-3. Démarrer le serveur FastAPI
-```bash
-uvicorn main:app --reload
-```
-
-Le serveur sera accessible à l'adresse : http://localhost:8000
-
-### Frontend (Next.js)
-
-1. Installer les dépendances
-```bash
 npm install
-# ou
-yarn install
 ```
 
-2. Démarrer le serveur de développement
+3. Démarrer le serveur de développement
 ```bash
 npm run dev
-# ou
-yarn dev
 ```
 
 L'application sera accessible à l'adresse : http://localhost:3000
 
-## Structure du projet
+## Structure de l'application Next.js
 
 ```
 ├── app/                  # Dossier principal Next.js
@@ -94,30 +89,13 @@ Pour déployer l'application en production :
 1. Construire l'application Next.js
 ```bash
 npm run build
-# ou
-yarn build
 ```
 
 2. Démarrer l'application en mode production
 ```bash
 npm start
-# ou
-yarn start
 ```
 
 ## Modèle d'IA
 
-Le modèle utilisé est un réseau neuronal LSTM entraîné sur un large corpus de tweets. Il est capable de classifier les tweets comme positifs ou négatifs avec un niveau de confiance associé.
-
-## MLOps
-
-Cette application implémente plusieurs principes de MLOps :
-- Suivi des expérimentations avec MLflow
-- API pour le déploiement du modèle
-- Tests automatisés (CI/CD)
-- Surveillance des performances du modèle via le système de feedback
-- Amélioration continue basée sur les retours utilisateurs
-
-## Licence
-
-Ce projet est développé pour Air Paradis dans le cadre d'une mission MLOps.
+L'application effectue des requêtes pour obtenir les prédictions auprès du serveur de l'API FastAPI. Le modèle utilisé est un réseau neuronal LSTM entraîné sur un large corpus de tweets. Il est capable de classifier les tweets comme positifs ou négatifs avec un niveau de confiance associé.

@@ -46,20 +46,22 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 
 2. **Développement des modèles**
    - Implémentation du modèle classique (régression logistique)
-   - Conception du modèle avancé avec différents word embeddings
-   - Test du modèle BERT pour l'analyse de sentiments
+   - Conception d'un modèle avancé utilisant les word embeddings et un réseau LSTM
+   - Conception d'un modèle BERT pour l'analyse de sentiments
    - Comparaison des performances via MLFlow
 
 3. **Mise en place de la démarche MLOps**
    - Configuration de MLFlow pour le tracking des expérimentations
    - Création du dépôt Git avec structure de projet appropriée
-   - Implémentation des tests unitaires automatisés
-   - Configuration du pipeline de déploiement continu
+
+4. **Développement du backend et du frontend de l'application**
+   - Développement de l'API de prédiction avec FastAPI
+   - Création de l'interface frontend (Next.js)
 
 4. **Déploiement et monitoring**
-   - Développement de l'API de prédiction avec FastAPI
+   - Implémentation des tests unitaires automatisés
+   - Configuration du pipeline de déploiement continu
    - Déploiement sur Heroku
-   - Création de l'interface de test (Streamlit ou Next.js)
    - Configuration du suivi via Azure Application Insight
 
 5. **Communication**
@@ -68,27 +70,32 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 
 ## 📦 Livrables
 
-1. **API de prédiction** déployée sur Heroku
-   - Exposant le "Modèle sur mesure avancé" via FastAPI
-   - Lien: [API Prediction Air Paradis](https://lien-vers-api.herokuapp.com)
+1. **Dépôt GitHub** contenant :
+   - Notebooks des modélisations avec tracking MLFlow pour les trois approches
+   - Code de déploiement de l'API (FastAPI)
+   - Code de l'interface utilisateur (Next.js)
+   - Fichier README explicatif et requirements.txt
+   - Lien: [GitHub Repository](https://github.com/DavidScanu/oc-ai-engineer-p07-analyse-sentiments-deep-learning)
 
 2. **Scripts de modélisation** pour les trois approches
    - Intégration avec MLFlow pour le tracking et l'enregistrement des modèles
 
-3. **Dépôt GitHub** contenant :
-   - Notebooks des modélisations avec tracking MLFlow
-   - Code de déploiement de l'API
-   - Fichier README explicatif et requirements.txt
-   - Lien: [GitHub Repository](https://github.com/DavidScanu/oc-ai-engineer-p06-analyse-sentiments-deep-learning/)
+3. **API de prédiction** (FastAPI)
+   - Exposant le **Modèle avancé** via FastAPI
+   - Mise en place d'un pipeline de déploiement continu (CI/CD)
+   - Test automatisés
+   - Déploiement sur Heroku
+   - Lien: [API Prediction Air Paradis](https://lien-vers-api.herokuapp.com)
 
-4. **Interface de test** (Streamlit ou Next.js)
+4. **Interface Frontend** (Next.js)
    - Permettant la saisie d'un tweet
-   - Affichant la prédiction et demandant validation à l'utilisateur
-   - Envoyant une trace à Application Insight en cas de non-validation
+   - Affichant la prédiction et demandant un feedback à l'utilisateur
+   - Envoyant une trace à **Application Insight** en cas de non-validation
 
 5. **Article de blog** (1500-2000 mots)
    - Comparaison des trois approches de modélisation
    - Présentation de la démarche MLOps mise en œuvre
+   - Conception et déploiement de l'API de prédiction et de l'interface utilisateur
    - Analyse du suivi de performance en production
 
 6. **Support de présentation**
@@ -103,9 +110,10 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 - **Bibliothèques ML/DL** : Scikit-learn, TensorFlow/Keras, Transformers (BERT)
 - **MLOps** : MLFlow, Git, GitHub Actions
 - **Backend** : FastAPI, Heroku
-- **Frontend** : Streamlit ou Next.js
+- **Frontend** : Next.js / React
 - **Monitoring** : Azure Application Insight
-- **Traitement texte** : NLTK/SpaCy, Word Embeddings
+- **Traitement texte** : NLTK, Word Embeddings
+
 
 ## 📃 Documentation
 
@@ -115,68 +123,111 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 - [Suivi de performance](docs/monitoring.md)
 - [Article de blog complet](docs/blog_post.md)
 
-## 🔄 Installation et utilisation
 
-Pour copier et installer le projet en local :
-
-```bash
-# Cloner le dépôt
-git clone git@github.com:DavidScanu/oc-ai-engineer-p07-analyse-sentiments-deep-learning.git
-cd oc-ai-engineer-p07-analyse-sentiments-deep-learning
-
-# Créer un environnement virtuel 
-source .venv/bin/activate
-
-# Installer les dépendances
-pip install -r requirements.txt
-```
-
-Pour configurer MLFlow dans le code Python : 
-
-Créer un fichier `.env` à la racine du projet contenant les variables de configuration du serveur MLFlow : 
-- `MLFLOW_TRACKING_URI`
-- `AWS_ACCESS_KEY_ID`
-- `AWS_SECRET_ACCESS_KEY`
-
-```python
-import mlflow
-from dotenv import load_dotenv
-
-# Charger les variables d'environnement depuis le fichier .env
-load_dotenv()
-
-# Configuration de MLflow avec les variables d'environnement
-mlflow_tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
-aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
-aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
-
-# Configuration de MLflow
-mlflow.set_tracking_uri(mlflow_tracking_uri)
-```
-
-Pour lancer les serveurs de l'API et du frontend en local : 
-
-```bash
-# Lancer l'API FastAPI en local
-uvicorn api.main:app --reload
-
-# Lancer l'interface Streamlit
-streamlit run frontend/app.py
-```
-
-### Structure du projet
+## Structure du projet
 
 ```
-📦 air-paradis-sentiment-analysis/
+📦 oc-ai-engineer-p07-analyse-sentiments-deep-learning/
 ┣━━ 📂 app/
 ┃   ┣━━ 📂 fastapi/                         # Backend API de prédiction
 ┃   ┗━━ 📂 frontend/                        # Application Next.js
 ┃
 ┣━━ 📂 documentation/                       # Documentation du projet
+┃   ┣━━ 📃 backend.md                         # Backend API de prédiction
+┃   ┗━━ 📃 frontend.md                        # Application Next.js
 ┃
 ┗━━ 📂 notebooks/                           # Notebooks Jupyter pour l'analyse et modèles
-    ┣━━ 📄 01_Analyse_exploratoire.ipynb     # Exploration et visualisation des données
-    ┣━━ 📄 02_Modele_simple.ipynb            # Bag of Words et classificateurs classiques
-    ┣━━ 📄 03_Modele_avance_Word2Vec.ipynb   # LSTM avec Word2Vec
-    ┗━━ 📄 04_Modele_BERT.ipynb              # DistilBERT pour analyse de sentiment
+    ┣━━ 📝 01_Analyse_exploratoire.ipynb     # Exploration et visualisation des données
+    ┣━━ 📝 02_Modele_simple.ipynb            # Bag of Words et classificateurs classiques
+    ┣━━ 📝 03_Modele_avance_Word2Vec.ipynb   # LSTM avec Word2Vec
+    ┗━━ 📝 04_Modele_BERT.ipynb              # DistilBERT pour analyse de sentiment
 ```
+
+## Notebooks 
+
+Les trois approches de modélisation, intégrant MLFlow pour le suivi des expérimentations et l'enregistrement des modèles, sont disponibles dans les notebooks suivants :
+
+- [Analyse exploratoire des données](notebooks/scanu-david-01-notebook-analyse-exploratoire-20250306.ipynb) : Analyse des données du jeu de données "Sentiment140"
+- [Modèle simple](notebooks/scanu-david-02-notebook-modele-simple-20250306.ipynb) : Bag Of Words + Classificateur
+- [Modèle avancé](notebooks/scanu-david-03-notebook-modele-avance-20250306.ipynb) : Word2vec + LSTM (utilisé par l'API en production)
+- [Modèle BERT](https://colab.research.google.com/drive/1TFq3selzmDCTReGfa2NvvlaNSRZMhdzY?usp=sharing) : Entraînement d'un modèle `DistilBertForSequenceClassification` (distilbert-base-uncased)
+
+## Application de Prédiction de Sentiment pour Tweets (Air Paradis)
+
+L'application permet d'analyser le sentiment (positif/négatif) des tweets grâce au modèle développé précedemment. Elle utilise le **modèle avancé (Word2vec et LSTM)**.
+
+### Architecture
+
+L'application est composée de deux parties principales :
+
+1. **Frontend** : Application Next.js avec Bootstrap pour l'interface utilisateur
+2. **Backend** : API FastAPI qui expose un modèle de deep learning pour l'analyse de sentiment
+
+### Fonctionnalités
+
+- Analyse du sentiment d'un tweet unique
+- Comparaison de plusieurs tweets simultanément
+- Historique des analyses effectuées
+- Exemples de tweets positifs et négatifs
+- Système de feedback pour améliorer le modèle
+- Interface responsive et intuitive
+- Mode clair/sombre
+
+### Installation
+
+#### Prérequis
+
+- Node.js (v18+)
+- npm ou yarn
+- Python 3.8+
+- Environnement virtuel Python (recommandé)
+
+#### Backend (FastAPI)
+
+1. Se déplacer vous dans le répertoire : 
+```bash
+cd app/fastapi/
+```
+
+2. Créer et activer un environnement virtuel
+```bash
+python -m venv venv
+source venv/bin/activate 
+```
+
+2. Installer les dépendances
+```bash
+pip install -r requirements.txt
+```
+
+3. Démarrer le serveur FastAPI
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Le serveur sera accessible à l'adresse : http://localhost:8000
+
+#### Frontend (Next.js)
+
+1. Se déplacer vous dans le répertoire : 
+```bash
+cd app/frontend/
+```
+
+2. Installer les dépendances
+```bash
+npm install
+```
+
+3. Démarrer le serveur de développement
+```bash
+npm run dev
+```
+
+L'application sera accessible à l'adresse : http://localhost:3000
+
+
+## A propos 
+
+Projet développé par [David Scanu](https://www.linkedin.com/in/davidscanu14/) dans le cadre du parcours [AI Engineer](https://openclassrooms.com/fr/paths/795-ai-engineer) d'OpenClassrooms :  
+*Projet 7 - Réalisez une analyse de sentiments grâce au Deep Learning*.
