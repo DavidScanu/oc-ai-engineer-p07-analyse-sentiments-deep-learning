@@ -163,6 +163,8 @@ L'application est composée de deux parties principales :
 1. **Frontend** : Application Next.js avec Bootstrap pour l'interface utilisateur
 2. **Backend** : API FastAPI qui expose un modèle de deep learning pour l'analyse de sentiment
 
+![App Mockup](images/app-mockup.png)
+
 ### Fonctionnalités
 
 - Analyse du sentiment d'un tweet unique
