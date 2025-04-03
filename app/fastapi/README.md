@@ -1,6 +1,6 @@
 # API de Prédiction de Sentiment pour Tweets
 
-Cette API permet de prédire le sentiment (positif ou négatif) associé à un tweet en utilisant un modèle LSTM avec Word2Vec pré-entraîné.
+Cette API, réalisé avec FastAPI, permet de prédire le sentiment (positif ou négatif) associé à un tweet en utilisant un modèle LSTM avec Word2Vec pré-entraîné.
 
 ## Fonctionnalités
 
