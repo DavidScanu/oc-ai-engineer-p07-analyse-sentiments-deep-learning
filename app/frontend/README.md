@@ -24,9 +24,7 @@ L'application est composée de deux parties principales :
 ### Prérequis
 
 - Node.js (v18+)
-- npm ou yarn
-- Python 3.8+
-- Environnement virtuel Python (recommandé)
+- npm
 
 ### Configuration de .env.local
 
@@ -44,17 +42,17 @@ NODE_ENV=development
 
 Pour lancer l'interface utilisateur, il faut exectuer ces commandes :
 
-1. Se déplacer vous dans le répertoire : 
+1. Se déplacer dans le répertoire : 
 ```bash
 cd app/frontend/
 ```
 
-2. Installer les dépendances
+2. Installer les dépendances :
 ```bash
 npm install
 ```
 
-3. Démarrer le serveur de développement
+3. Démarrer le serveur de développement :
 ```bash
 npm run dev
 ```
@@ -67,7 +65,6 @@ L'application sera accessible à l'adresse : http://localhost:3000
 ├── app/                  # Dossier principal Next.js
 │   ├── about/            # Page À propos
 │   ├── compare/          # Page Comparaison
-│   ├── actions.js        # Server Actions
 │   ├── globals.css       # Styles globaux
 │   ├── layout.js         # Layout principal
 │   └── page.js           # Page d'accueil
@@ -80,6 +77,8 @@ L'application sera accessible à l'adresse : http://localhost:3000
 │   ├── ResultCard.js     # Carte de résultat
 │   └── TweetForm.js      # Formulaire principal
 └── public/               # Fichiers statiques
+├── utils/                # Dossier de fonctions utiles
+│   └── actions.js        # Server Actions
 ```
 
 ## Déploiement
