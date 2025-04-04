@@ -13,6 +13,10 @@ body {
   margin: 0;
 }
 
+#main-title {
+  font-weight: bold;
+}
+
 .tweet-form #tweet {
   z-index: 1;
 }
