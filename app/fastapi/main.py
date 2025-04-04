@@ -500,38 +500,6 @@ async def predict_batch(request: BatchTweetRequest):
         logger.error(f"Erreur lors de la prédiction par lot: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Erreur lors de la prédiction par lot: {str(e)}")
     
-@app.get("/test-appinsights")
-async def test_appinsights_connection():
-    """
-    Endpoint pour tester la connexion à Azure Application Insights.
-    """
-    if not telemetry_client:
-        return {
-            "status": "error",
-            "message": "Aucun client Application Insights n'est configuré. Vérifiez la variable d'environnement APPINSIGHTS_INSTRUMENTATION_KEY."
-        }
-    
-    try:
-        # Envoyer un événement de test
-        telemetry_client.track_event(
-            name="appinsights_connection_test",
-            properties={
-                "timestamp": datetime.now().isoformat(),
-                "test_id": str(uuid.uuid4())
-            }
-        )
-        telemetry_client.flush()
-        
-        return {
-            "status": "success",
-            "message": "Événement de test envoyé à Application Insights. Vérifiez le portail Azure pour confirmer la réception."
-        }
-    except Exception as e:
-        return {
-            "status": "error",
-            "message": f"Erreur lors du test de connexion à Application Insights: {str(e)}"
-        }  
-
 @app.post("/feedback")
 async def record_feedback(feedback: FeedbackRequest):
     """
@@ -578,6 +546,39 @@ async def record_feedback(feedback: FeedbackRequest):
     except Exception as e:
         logger.error(f"Erreur lors de l'enregistrement du feedback: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Erreur lors de l'enregistrement du feedback: {str(e)}")
+
+@app.get("/test-appinsights")
+async def test_appinsights_connection():
+    """
+    Endpoint pour tester la connexion à Azure Application Insights.
+    """
+    if not telemetry_client:
+        return {
+            "status": "error",
+            "message": "Aucun client Application Insights n'est configuré. Vérifiez la variable d'environnement APPINSIGHTS_INSTRUMENTATION_KEY."
+        }
+    
+    try:
+        # Envoyer un événement de test
+        telemetry_client.track_event(
+            name="appinsights_connection_test",
+            properties={
+                "timestamp": datetime.now().isoformat(),
+                "test_id": str(uuid.uuid4())
+            }
+        )
+        telemetry_client.flush()
+        
+        return {
+            "status": "success",
+            "message": "Événement de test envoyé à Application Insights. Vérifiez le portail Azure pour confirmer la réception."
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": f"Erreur lors du test de connexion à Application Insights: {str(e)}"
+        }  
+
 
 # Point d'entrée pour exécuter l'application
 if __name__ == "__main__":

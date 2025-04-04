@@ -1,13 +1,19 @@
 import TweetForm from '@/components/TweetForm';
 import BootstrapClient from '@/components/BootstrapClient';
 import ApiStatus from '@/components/ApiStatus';
+import GpuStatus from '@/components/GpuStatus';
+import AppInsightsTest from '@/components/AppInsightsTest';
 import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
     <main>
       <BootstrapClient />
-      <ApiStatus />
+      <div className="position-fixed bottom-0 end-0 m-3 d-none d-md-block">
+        <ApiStatus />
+        <GpuStatus />
+        <AppInsightsTest />
+      </div>
       <div className="container py-5">
         <div className="row justify-content-center">
           <div className="col-lg-8">

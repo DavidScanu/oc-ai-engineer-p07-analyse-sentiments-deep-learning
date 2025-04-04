@@ -71,6 +71,56 @@ export async function checkApiHealth() {
   }
 }
 
+// Action pour récupérer les informations sur l'API (version TF, GPU, etc.)
+export async function getApiInfo() {
+  try {
+    const response = await fetch('http://localhost:8000/info', {
+      cache: 'no-store',
+    })
+    
+    if (!response.ok) {
+      return {
+        status: false,
+        error: response.statusText
+      }
+    }
+    
+    return {
+      status: true,
+      data: await response.json()
+    }
+  } catch (error) {
+    return {
+      status: false,
+      error: error.message
+    }
+  }
+}
+
+// Action pour tester la connexion à Application Insights
+export async function testAppInsightsConnection() {
+  try {
+    const response = await fetch('http://localhost:8000/test-appinsights', {
+      cache: 'no-store',
+    })
+    
+    const data = await response.json()
+    
+    return {
+      status: response.ok,
+      message: data.message,
+      details: data
+    }
+  } catch (error) {
+    console.error('Erreur lors du test de connexion à Application Insights:', error)
+    return {
+      status: false,
+      message: `Erreur lors du test de connexion: ${error.message}`,
+      details: null
+    }
+  }
+}
+
 // Action pour envoyer le feedback utilisateur
 export async function sendUserFeedback(feedback) {
   try {

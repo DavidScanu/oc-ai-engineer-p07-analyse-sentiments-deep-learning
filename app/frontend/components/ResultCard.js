@@ -51,8 +51,17 @@ export default function ResultCard({ result, tweetText = '' }) {
             style={{ width: `${confidencePercentage}%` }}
           ></div>
         </div>
-        
-        <div className="card-text">
+
+        <div className='tweet-text mt-4 mb-2'>
+          <h6 className="card-subtitle mb-2 text-muted">Analyse du Tweet</h6>
+          <blockquote className="blockquote mb-0 border rounded p-3 bg-light text-body-secondary">
+            <p className="blockquote-text">
+              <strong className='fw-bold'>{tweetText}</strong>
+            </p>
+          </blockquote>
+        </div>
+
+        <div className="card-text text-muted small">
           <p>
             {isPositive 
               ? `Ce tweet est perçu comme positif avec une confiance de ${confidencePercentage}%. Le modèle a détecté des éléments linguistiques généralement associés à une expression positive.`

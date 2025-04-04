@@ -13,6 +13,10 @@ body {
   margin: 0;
 }
 
+.tweet-form #tweet {
+  z-index: 1;
+}
+
 
 .result-card {
   transition: all 0.3s ease;

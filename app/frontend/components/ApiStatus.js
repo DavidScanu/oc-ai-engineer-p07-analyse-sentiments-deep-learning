@@ -52,7 +52,7 @@ export default function ApiStatus() {
   }
 
   return (
-    <div className="position-fixed bottom-0 end-0 m-3">
+    <div className="api-status m-2">
       <span className={badgeClass}>
         <span className={iconClass} role="status" aria-hidden="true"></span>
         {status === 'loading' ? 'Vérification de l\'API...' : 

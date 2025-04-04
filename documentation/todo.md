@@ -1,7 +1,11 @@
 # ☑️ TODO
 
-- Modèle Bert : entraînement sur Colab (max_epochs) ✔️
+- Modèles : 
+  - Modèle Bert : entraînement sur Colab (max_epochs) ✔️
+  - Tableau de comparaison des modèles 🚧
 - Frontend : Next.js ✔️
+  - App Insights Widget
+  - Afficher le tweet dans le résultat de la prédiction ✔️
 - Readme.md ✔️
 - Docker 🚧
 
@@ -23,6 +27,26 @@ Initier un suivi de la performance du modèle en production. Pour cela tu utilis
 
 ## Rapports
 
-- Vidéo démo de l'appli (2 mins max) 🚧
-- Présentation (MLOps life cycle) 🚧
-- Articles (Partie 1 et Partie 2) 🚧
+- 📺 Vidéo démo de l'appli (2 mins max) 🚧
+- 🖼️ Présentation (MLOps life cycle) 🚧
+- 📝 Articles (Partie 1 et Partie 2) 🚧
+
+## Présentation 
+
+- Contexte : projet répond au besoin, vérifier ce que les clients disent du produit 
+  - Avec l'API on pourrait automatiser la lecture des tweet avec @AirParadis ou #AirParadis
+- Jeu de données 
+- Analyse exploratoire 
+- Modele simple
+- Modèle Avancée
+- Modèle BERT
+- Schéma Architecture / MLOps : 
+  - Notebook
+  - MLFlow
+  - FastAPI
+  - Frontend
+- Démo live / vidéo 
+  - Prédiction
+  - Feedback
+  - Alertes
+- Conclusion
