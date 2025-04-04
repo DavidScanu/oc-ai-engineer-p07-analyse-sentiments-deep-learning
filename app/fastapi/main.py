@@ -335,48 +335,6 @@ def load_model() -> Dict[str, Any]:
         logger.error(f"Erreur lors du chargement du modèle: {str(e)}")
         raise
 
-# Fonction pour prédire le sentiment d'un texte
-def predict_sentiment(text: str, model_pack: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Prédit le sentiment d'un texte en utilisant le modèle chargé.
-    
-    Args:
-        text: Texte à analyser
-        model_pack: Dictionnaire contenant le modèle et ses artefacts
-    
-    Returns:
-        Dict contenant le sentiment prédit, le niveau de confiance et le score brut
-    """
-    try:
-        model = model_pack["model"]
-        tokenizer = model_pack["tokenizer"]
-        preprocess = model_pack["preprocess"]
-        params = model_pack["params"]
-        
-        # Prétraiter le texte
-        preprocessed_text = preprocess(text)
-        
-        # Tokeniser et encoder le texte
-        tokens = tokenizer.texts_to_sequences([preprocessed_text])
-        max_length = params.get("max_sequence_length", MAX_SEQUENCE_LENGTH)
-        padded_tokens = pad_sequences(tokens, maxlen=max_length, padding='post', truncating='post')
-        
-        # Prédire le sentiment
-        prediction = model.predict(padded_tokens, verbose=0)[0][0]
-        
-        # Interpréter la prédiction
-        sentiment = "Positif" if prediction >= 0.5 else "Négatif"
-        confidence = float(prediction) if prediction >= 0.5 else float(1 - prediction)
-        
-        return {
-            'sentiment': sentiment,
-            'confidence': confidence,
-            'raw_score': float(prediction)
-        }
-        
-    except Exception as e:
-        logger.error(f"Erreur lors de la prédiction: {str(e)}")
-        raise
 
 # Fonction pour prédire le sentiment d'un lot de textes
 def predict_sentiment_batch(texts: List[str], model_pack: Dict[str, Any]) -> List[Dict[str, Any]]:
