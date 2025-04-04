@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main>
       <BootstrapClient />
-      <div className="position-fixed bottom-0 end-0 m-3 d-none d-md-block">
+      <div className="position-fixed bottom-0 end-0 m-3 d-none d-md-block text-end" style={{ zIndex: 9999 }}>
         <ApiStatus />
         <GpuStatus />
         <AppInsightsTest />
