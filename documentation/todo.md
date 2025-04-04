@@ -4,8 +4,6 @@
   - Modèle Bert : entraînement sur Colab (max_epochs) ✔️
   - Tableau de comparaison des modèles 🚧
 - Frontend : Next.js ✔️
-  - App Insights Widget (minor bug) 🚧
-  - Afficher le tweet dans le résultat de la prédiction ✔️
 - Readme.md ✔️
 - Docker 🚧
 
