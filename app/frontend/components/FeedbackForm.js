@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 
 export default function FeedbackForm({ tweetText, prediction }) {
   const [feedbackStatus, setFeedbackStatus] = useState('none') // 'none', 'positive', 'negative', 'submitted'
@@ -64,39 +65,60 @@ export default function FeedbackForm({ tweetText, prediction }) {
   }
   
   // Fonction commune pour sauvegarder le feedback
-  const saveFeedback = (isPositive, correctionType = '', comments = '') => {
-    // Informations de base du feedback
+  const saveFeedback = async (isPositive, correctionType = '', comments = '') => {
+    // Récupérer l'URL de l'API depuis les variables d'environnement
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+    
+    // Générer un ID unique pour ce feedback
+    const feedbackId = uuidv4();
+    
+    // Préparer les données au format attendu par le backend
     const feedbackData = {
-      tweet: tweetText,
+      tweet_text: tweetText,
       prediction: prediction.sentiment,
       confidence: prediction.confidence,
-      userFeedback: isPositive ? 'correct' : 'incorrect',
-      timestamp: new Date().toISOString()
-    }
+      is_correct: isPositive,
+      // N'inclure les champs optionnels que s'ils contiennent des données
+      ...(correctionType && { corrected_sentiment: correctionType }),
+      ...(comments && { comments: comments })
+    };
     
-    // Ajouter les détails si c'est un feedback négatif
-    if (!isPositive) {
-      feedbackData.correctionType = correctionType
-      feedbackData.comments = comments
-    }
-    
-    console.log('Feedback envoyé:', feedbackData)
+    console.log('Feedback préparé:', feedbackData);
     
     // Enregistrer dans l'historique local
-    const feedbackHistory = JSON.parse(localStorage.getItem('feedbackHistory') || '{}')
-    const predictionId = `${tweetText}_${prediction?.timestamp || Date.now()}`
+    const feedbackHistory = JSON.parse(localStorage.getItem('feedbackHistory') || '{}');
     
-    feedbackHistory[predictionId] = {
+    feedbackHistory[feedbackId] = {
       isCorrect: isPositive,
       correctionType,
       comments,
       timestamp: new Date().toISOString()
+    };
+    
+    localStorage.setItem('feedbackHistory', JSON.stringify(feedbackHistory));
+    
+    // Envoyer au backend
+    try {
+      const response = await fetch(`${apiUrl}/feedback`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(feedbackData),
+      });
+      
+      if (!response.ok) {
+        console.error('Erreur lors de l\'envoi du feedback au serveur:', await response.text());
+        return false;
+      } else {
+        console.log('Feedback envoyé avec succès au serveur');
+        return true;
+      }
+    } catch (error) {
+      console.error('Erreur de connexion lors de l\'envoi du feedback:', error);
+      return false;
     }
-    
-    localStorage.setItem('feedbackHistory', JSON.stringify(feedbackHistory))
-    
-    // Dans une implémentation réelle, on enverrait une requête au backend ici
-  }
+  };
   
   // Si pas de prédiction, ne rien afficher
   if (!tweetText || !prediction) return null
@@ -133,8 +155,6 @@ export default function FeedbackForm({ tweetText, prediction }) {
               <option value="" disabled>Sélectionnez une option</option>
               <option value="positive">Positif</option>
               <option value="negative">Négatif</option>
-              <option value="neutral">Neutre</option>
-              <option value="mixed">Mixte (éléments positifs et négatifs)</option>
             </select>
           </div>
           

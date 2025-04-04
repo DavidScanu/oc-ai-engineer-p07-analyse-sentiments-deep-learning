@@ -23,9 +23,10 @@ Créez un fichier `.env` à la racine du projet avec les variables suivantes :
 
 ```
 MLFLOW_TRACKING_URI=https://votre-serveur-mlflow.com/
-RUN_ID=identifiant-de-votre-modele-mlflow
 AWS_ACCESS_KEY_ID=votre-cle-dacces-aws
 AWS_SECRET_ACCESS_KEY=votre-cle-secrete-aws
+RUN_ID=identifiant-de-votre-modele-mlflow
+APPINSIGHTS_INSTRUMENTATION_KEY=cle-instrumentation-azure-application-insights
 ```
 
 ## Déploiement

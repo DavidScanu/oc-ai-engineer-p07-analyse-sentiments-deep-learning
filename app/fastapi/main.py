@@ -5,8 +5,10 @@ import dill
 import pickle
 import tempfile
 import shutil
+import uuid
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import mlflow
@@ -29,6 +31,7 @@ from nltk.corpus import stopwords
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
+
 
 # Forcer TensorFlow à utiliser uniquement le CPU
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
@@ -66,6 +69,38 @@ MODEL_DIR.mkdir(exist_ok=True)
 # Variable globale pour stocker le modèle chargé
 model_pack = None
 
+
+# Configuration du logging (avant Application Insights)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# Configuration d'Azure Application Insights
+from opencensus.ext.azure.log_exporter import AzureLogHandler
+from applicationinsights import TelemetryClient
+from datetime import datetime, timedelta
+
+# Récupérer la clé d'instrumentation depuis les variables d'environnement
+appinsights_key = os.getenv("APPINSIGHTS_INSTRUMENTATION_KEY")
+telemetry_client = None
+
+if appinsights_key:
+    # Configurer le client Application Insights
+    telemetry_client = TelemetryClient(appinsights_key)
+    logger.info("Azure Application Insights configuré avec succès.")
+    
+    try:
+        # Ajouter un gestionnaire Azure Log Handler
+        logger.addHandler(AzureLogHandler(
+            connection_string=f'InstrumentationKey={appinsights_key}'
+        ))
+        logger.info("Azure Application Insights configuré avec succès.")
+    except Exception as e:
+        logger.warning(f"Erreur lors de la configuration d'Azure Log Handler: {str(e)}")
+else:
+    logger.warning("Clé d'instrumentation Application Insights non trouvée. La télémétrie ne sera pas envoyée.")
+
+
+
 # Définition du gestionnaire de contexte pour le cycle de vie de l'application
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -101,6 +136,15 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# Support CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Origine de ton frontend Next.js
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # Modèle de données pour les requêtes
 class TweetRequest(BaseModel):
@@ -119,6 +163,16 @@ class SentimentResponse(BaseModel):
 # Modèle de données pour la réponse par lot
 class BatchSentimentResponse(BaseModel):
     results: List[SentimentResponse]
+
+# Modèle de données pour le feedback utilisateur
+class FeedbackRequest(BaseModel):
+    tweet_text: str
+    prediction: str
+    confidence: float
+    is_correct: bool
+    corrected_sentiment: str = ""
+    comments: str = ""
+
 
 # Fonction pour télécharger les artefacts depuis MLflow
 # et les sauvegarder localement
@@ -425,7 +479,6 @@ async def predict(request: TweetRequest):
         logger.error(f"Erreur lors de la prédiction: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Erreur lors de la prédiction: {str(e)}")
 
-
 @app.post("/predict-batch", response_model=BatchSentimentResponse)
 async def predict_batch(request: BatchTweetRequest):
     """
@@ -447,6 +500,84 @@ async def predict_batch(request: BatchTweetRequest):
         logger.error(f"Erreur lors de la prédiction par lot: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Erreur lors de la prédiction par lot: {str(e)}")
     
+@app.get("/test-appinsights")
+async def test_appinsights_connection():
+    """
+    Endpoint pour tester la connexion à Azure Application Insights.
+    """
+    if not telemetry_client:
+        return {
+            "status": "error",
+            "message": "Aucun client Application Insights n'est configuré. Vérifiez la variable d'environnement APPINSIGHTS_INSTRUMENTATION_KEY."
+        }
+    
+    try:
+        # Envoyer un événement de test
+        telemetry_client.track_event(
+            name="appinsights_connection_test",
+            properties={
+                "timestamp": datetime.now().isoformat(),
+                "test_id": str(uuid.uuid4())
+            }
+        )
+        telemetry_client.flush()
+        
+        return {
+            "status": "success",
+            "message": "Événement de test envoyé à Application Insights. Vérifiez le portail Azure pour confirmer la réception."
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": f"Erreur lors du test de connexion à Application Insights: {str(e)}"
+        }  
+
+@app.post("/feedback")
+async def record_feedback(feedback: FeedbackRequest):
+    """
+    Endpoint pour enregistrer le feedback utilisateur sur les prédictions.
+    
+    Args:
+        feedback: Informations sur la prédiction et le feedback de l'utilisateur
+    
+    Returns:
+        Dict: Statut de l'enregistrement du feedback
+    """
+    try:
+        # Log details
+        logger.info(f"Feedback reçu: {feedback.dict()}")
+        
+        # Enregistrer dans Application Insights si configuré
+        if telemetry_client:
+            # Construire les propriétés en incluant seulement les champs non vides
+            properties = {
+                "tweet": feedback.tweet_text,
+                "prediction": feedback.prediction,
+                "confidence": str(feedback.confidence),
+                "is_correct": str(feedback.is_correct)
+            }
+            
+            # Ajouter les propriétés optionnelles si elles sont présentes
+            if feedback.corrected_sentiment:
+                properties["corrected_sentiment"] = feedback.corrected_sentiment
+            
+            if feedback.comments:
+                properties["comments"] = feedback.comments
+            
+            # Enregistrer l'événement de feedback
+            telemetry_client.track_event(
+                name="model_feedback",
+                properties=properties
+            )
+            
+            # Envoyer les données immédiatement
+            telemetry_client.flush()
+            
+        return {"status": "success", "message": "Feedback enregistré avec succès"}
+        
+    except Exception as e:
+        logger.error(f"Erreur lors de l'enregistrement du feedback: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Erreur lors de l'enregistrement du feedback: {str(e)}")
 
 # Point d'entrée pour exécuter l'application
 if __name__ == "__main__":

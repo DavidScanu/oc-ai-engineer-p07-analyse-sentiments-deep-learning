@@ -115,14 +115,17 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 - **Traitement texte** : NLTK, Word Embeddings
 
 
-## 📃 Documentation
+## 📃 Documents et Notebooks
 
-- [Guide d'utilisation de l'API](docs/api_guide.md)
-- [Description détaillée des modèles](docs/models.md)
-- [Implémentation MLOps](docs/mlops.md)
-- [Suivi de performance](docs/monitoring.md)
-- [Article de blog complet](docs/blog_post.md)
-
+- [Guide d'utilisation de l'API FastAPI](app/fastapi/README.md) : API FastAPI qui expose un modèle de deep learning pour l'analyse de sentiment
+- [Guide d'utilisation du frontend Next.JS](app/frontend/README.md) : Application Next.js avec Bootstrap pour l'interface utilisateur
+- [Guide de Monitoring pour Air Paradis](documentation/guide-app-insights.md) : Mise en place du feedback utilisateur et des alertes avec Azure Application insights
+- **Notebooks** :
+   - [Analyse exploratoire des données](notebooks/scanu-david-01-notebook-analyse-exploratoire-20250306.ipynb) : Analyse des données du jeu de données "Sentiment140"
+   - [Modèle simple](notebooks/scanu-david-02-notebook-modele-simple-20250306.ipynb) : Bag Of Words + Classificateur
+   - [Modèle avancé](notebooks/scanu-david-03-notebook-modele-avance-20250306.ipynb) : Word2vec + LSTM (utilisé par l'API en production)
+   - [Modèle BERT](https://colab.research.google.com/drive/1TFq3selzmDCTReGfa2NvvlaNSRZMhdzY?usp=sharing) : Entraînement d'un modèle `DistilBertForSequenceClassification` (distilbert-base-uncased)
+- [Article de blog complet]()
 
 ## Structure du projet
 
@@ -133,8 +136,7 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 ┃   ┗━━ 📂 frontend/                        # Application Next.js
 ┃
 ┣━━ 📂 documentation/                       # Documentation du projet
-┃   ┣━━ 📃 backend.md                         # Backend API de prédiction
-┃   ┗━━ 📃 frontend.md                        # Application Next.js
+┃   ┗━━ 📃 guide-app-insights.md            # Guide de suivi des feedback utilisateur et des alertes avec Azure Application insights
 ┃
 ┗━━ 📂 notebooks/                           # Notebooks Jupyter pour l'analyse et modèles
     ┣━━ 📝 01_Analyse_exploratoire.ipynb     # Exploration et visualisation des données
@@ -143,14 +145,6 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
     ┗━━ 📝 04_Modele_BERT.ipynb              # DistilBERT pour analyse de sentiment
 ```
 
-## Notebooks 
-
-Les trois approches de modélisation, intégrant MLFlow pour le suivi des expérimentations et l'enregistrement des modèles, sont disponibles dans les notebooks suivants :
-
-- [Analyse exploratoire des données](notebooks/scanu-david-01-notebook-analyse-exploratoire-20250306.ipynb) : Analyse des données du jeu de données "Sentiment140"
-- [Modèle simple](notebooks/scanu-david-02-notebook-modele-simple-20250306.ipynb) : Bag Of Words + Classificateur
-- [Modèle avancé](notebooks/scanu-david-03-notebook-modele-avance-20250306.ipynb) : Word2vec + LSTM (utilisé par l'API en production)
-- [Modèle BERT](https://colab.research.google.com/drive/1TFq3selzmDCTReGfa2NvvlaNSRZMhdzY?usp=sharing) : Entraînement d'un modèle `DistilBertForSequenceClassification` (distilbert-base-uncased)
 
 ## Application de Prédiction de Sentiment pour Tweets (Air Paradis)
 
@@ -171,7 +165,7 @@ L'application est composée de deux parties principales :
 - Comparaison de plusieurs tweets simultanément
 - Historique des analyses effectuées
 - Exemples de tweets positifs et négatifs
-- Système de feedback pour améliorer le modèle
+- Système de feedback pour améliorer le modèle et système d'alerte
 - Interface responsive et intuitive
 - Mode clair/sombre
 
