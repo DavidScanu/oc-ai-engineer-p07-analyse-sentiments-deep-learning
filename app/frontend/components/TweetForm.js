@@ -125,7 +125,7 @@ export default function TweetForm() {
               id="tweet"
               name="tweet"
               className="form-control"
-              rows="4"
+              rows="2"
               placeholder="Entrez ici le texte de votre tweet..."
               value={tweetText}
               onChange={(e) => setTweetText(e.target.value)}
