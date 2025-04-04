@@ -127,7 +127,20 @@ export default function AppInsightsTest() {
                       Les données de test ont été envoyées à Application Insights. Vérifiez le portail Azure pour confirmer la réception.
                     </div>
                   )}
-                  
+
+                  {status === 'success' && (
+                    <div className="mt-3 bg-light p-3 rounded">
+                      <h6 className="mb-2">Requête Kusto pour vérifier les événements envoyés :</h6>
+                      <pre className="mb-0 p-2 border">
+                        <code>
+                          <div>customEvents</div>
+                          <div>| where name == "appinsights_connection_test"</div>
+                          <div>| sort by timestamp desc</div>
+                        </code>
+                      </pre>
+                    </div>
+                  )}
+
                   {status === 'error' && (
                     <div className="alert alert-warning mt-3 small">
                       <i className="bi bi-exclamation-circle me-2"></i>
