@@ -4,7 +4,7 @@
   - Modèle Bert : entraînement sur Colab (max_epochs) ✔️
   - Tableau de comparaison des modèles 🚧
 - Frontend : Next.js ✔️
-  - App Insights Widget
+  - App Insights Widget (minor bug) 🚧
   - Afficher le tweet dans le résultat de la prédiction ✔️
 - Readme.md ✔️
 - Docker 🚧
@@ -25,13 +25,13 @@ Initier un suivi de la performance du modèle en production. Pour cela tu utilis
 - Pipeline de déploiement continu du modèle que tu auras choisi via une API (Git + Github + Heroku)
 - Intègre également des tests unitaires automatisés (Github actions)
 
-## Rapports
+## Soutenance
 
 - 📺 Vidéo démo de l'appli (2 mins max) 🚧
 - 🖼️ Présentation (MLOps life cycle) 🚧
 - 📝 Articles (Partie 1 et Partie 2) 🚧
 
-## Présentation 
+### Présentation 
 
 - Contexte : projet répond au besoin, vérifier ce que les clients disent du produit 
   - Avec l'API on pourrait automatiser la lecture des tweet avec @AirParadis ou #AirParadis
