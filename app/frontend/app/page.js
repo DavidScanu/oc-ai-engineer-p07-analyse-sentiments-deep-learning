@@ -19,7 +19,7 @@ export default function Home() {
           <div className="col-lg-8">
             <div className="text-center mb-3">
               <div className='main-cover mb-3'>
-                <img src="tweet-cover.png" alt="Cover" className="img-fluid" />
+                <img src="logo-air-paradis-app-400.png" alt="Cover" className="img-fluid" width="200" />
               </div>
               <h1 id="main-title" className="display-5 fw-bold text-primary">Analyse de Sentiment pour Tweets</h1>
               <p className="lead text-secondary">

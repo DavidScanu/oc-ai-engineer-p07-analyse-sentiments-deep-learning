@@ -25,7 +25,7 @@ export default function NavBar() {
     <nav className={`navbar navbar-expand-lg ${theme === 'light' ? 'navbar-light bg-light' : 'navbar-dark bg-dark'} shadow-sm`}>
       <div className="container">
         <Link href="/" className="navbar-brand d-flex align-items-center">
-          <i className="bi bi-airplane me-2 text-primary"></i>
+          <img src="logo-air-paradis-app-400.png" alt="Logo" className="me-2" width="40" height="40" />
           <span>Air Paradis - Analyse de Sentiments</span>
         </Link>
         
