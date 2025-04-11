@@ -10,7 +10,12 @@
 
 ![People tweeting](images/tweet-cover.png)
 
-## 📝 Contexte
+## 📝 Article détaillé 
+
+Retrouvez l'article complet [💬❤️ Analyse de Sentiments de Tweets grâce au Deep Learning : Une Approche MLOps](https://dev.to/davidscanu/analyse-de-sentiments-de-tweets-grace-au-deep-learning-une-approche-mlops-3ib7) qui explique en détails chaque étape du projet.
+
+
+## 🌐 Contexte
 
 Dans le cadre de ma formation d'AI Engineer chez OpenClassrooms, ce projet s'inscrit dans un scénario professionnel où j'interviens en tant qu'ingénieur IA chez MIC (Marketing Intelligence Consulting), entreprise de conseil spécialisée en marketing digital.
 
