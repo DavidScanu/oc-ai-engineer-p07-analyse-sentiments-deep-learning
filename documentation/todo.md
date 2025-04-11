@@ -21,30 +21,13 @@ Initier un suivi de la performance du modèle en production. Pour cela tu utilis
 ## Déploiement 🚧
 
 - Pipeline de déploiement continu du modèle que tu auras choisi via une API (Git + Github + Heroku)
-- Intègre également des tests unitaires automatisés (Github actions)
+  - Test unitaires ✔️
+  - GitHub Actions 🚧
+  - Déploiement sur Heroku 🚧
 
 ## Soutenance
 
+- 🖼️ Présentation (MLOps life cycle) ✔️
 - 📺 Vidéo démo de l'appli (2 mins max) 🚧
-- 🖼️ Présentation (MLOps life cycle) 🚧
 - 📝 Articles (Partie 1 et Partie 2) 🚧
-
-### Présentation 
-
-- Contexte : projet répond au besoin, vérifier ce que les clients disent du produit 
-  - Avec l'API on pourrait automatiser la lecture des tweet avec @AirParadis ou #AirParadis
-- Jeu de données 
-- Analyse exploratoire 
-- Modele simple
-- Modèle Avancée
-- Modèle BERT
-- Schéma Architecture / MLOps : 
-  - Notebook
-  - MLFlow
-  - FastAPI
-  - Frontend
-- Démo live / vidéo 
-  - Prédiction
-  - Feedback
-  - Alertes
-- Conclusion
+- Envoyer les fichiers sur Openclassrooms 
