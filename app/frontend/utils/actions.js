@@ -1,10 +1,13 @@
 'use server'
 
+// Récupérer l'URL de l'API depuis les variables d'environnement
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 // Action pour prédire le sentiment d'un tweet
 export async function predictSentiment(text) {
   try {
     // Configuration de la requête vers l'API FastAPI
-    const response = await fetch('http://localhost:8000/predict', {
+    const response = await fetch(`${API_URL}/predict`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +34,7 @@ export async function predictSentiment(text) {
 // Action pour prédire le sentiment de plusieurs tweets (batch)
 export async function predictSentimentBatch(texts) {
   try {
-    const response = await fetch('http://localhost:8000/predict-batch', {
+    const response = await fetch(`${API_URL}/predict-batch`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,7 +58,7 @@ export async function predictSentimentBatch(texts) {
 // Action pour vérifier la santé de l'API
 export async function checkApiHealth() {
   try {
-    const response = await fetch('http://localhost:8000/health', {
+    const response = await fetch(`${API_URL}/health`, {
       cache: 'no-store',
     })
     
@@ -74,7 +77,7 @@ export async function checkApiHealth() {
 // Action pour récupérer les informations sur l'API (version TF, GPU, etc.)
 export async function getApiInfo() {
   try {
-    const response = await fetch('http://localhost:8000/info', {
+    const response = await fetch(`${API_URL}/info`, {
       cache: 'no-store',
     })
     
@@ -100,7 +103,7 @@ export async function getApiInfo() {
 // Action pour tester la connexion à Application Insights
 export async function testAppInsightsConnection() {
   try {
-    const response = await fetch('http://localhost:8000/test-appinsights', {
+    const response = await fetch(`${API_URL}/test-appinsights`, {
       cache: 'no-store',
     })
     
@@ -122,42 +125,35 @@ export async function testAppInsightsConnection() {
 }
 
 // Action pour envoyer le feedback utilisateur
-export async function sendUserFeedback(feedback) {
+export async function sendUserFeedback(feedbackData) {
   try {
-    // Dans une implémentation réelle, vous enverriez ces données à
-    // Application Insights ou à votre propre endpoint
-    console.log('Envoi de feedback:', feedback)
+    // Récupérer l'URL de l'API depuis les variables d'environnement
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
     
-    // Simulation d'un envoi de données réussi
-    return { 
-      success: true,
-      message: 'Feedback enregistré avec succès'
-    }
+    console.log('Feedback préparé:', feedbackData);
     
-    // Dans une application réelle, vous pourriez avoir quelque chose comme:
-    /*
-    const response = await fetch('http://localhost:8000/feedback', {
+    // Envoyer au backend
+    const response = await fetch(`${apiUrl}/feedback`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(feedback),
-    })
+      body: JSON.stringify(feedbackData),
+      cache: 'no-store',
+    });
     
     if (!response.ok) {
-      throw new Error('Erreur lors de l\'envoi du feedback')
+      console.error('Erreur lors de l\'envoi du feedback au serveur:', await response.text());
+      return { success: false, error: 'Erreur serveur' };
     }
     
-    return await response.json()
-    */
+    return { success: true, message: 'Feedback envoyé avec succès au serveur' };
   } catch (error) {
-    console.error('Erreur lors de l\'envoi du feedback:', error)
-    return {
-      success: false,
-      error: error.message
-    }
+    console.error('Erreur de connexion lors de l\'envoi du feedback:', error);
+    return { success: false, error: error.message };
   }
 }
+
 
 // Action pour récupérer des statistiques de modèle (fictif pour la démo)
 export async function getModelStats() {

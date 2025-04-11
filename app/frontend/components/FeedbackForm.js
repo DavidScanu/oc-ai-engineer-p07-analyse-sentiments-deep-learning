@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import { sendUserFeedback } from '../utils/actions';
+
 
 export default function FeedbackForm({ tweetText, prediction }) {
   const [feedbackStatus, setFeedbackStatus] = useState('none') // 'none', 'positive', 'negative', 'submitted'
@@ -66,9 +68,6 @@ export default function FeedbackForm({ tweetText, prediction }) {
   
   // Fonction commune pour sauvegarder le feedback
   const saveFeedback = async (isPositive, correctionType = '', comments = '') => {
-    // Récupérer l'URL de l'API depuis les variables d'environnement
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-    
     // Générer un ID unique pour ce feedback
     const feedbackId = uuidv4();
     
@@ -83,8 +82,6 @@ export default function FeedbackForm({ tweetText, prediction }) {
       ...(comments && { comments: comments })
     };
     
-    console.log('Feedback préparé:', feedbackData);
-    
     // Enregistrer dans l'historique local
     const feedbackHistory = JSON.parse(localStorage.getItem('feedbackHistory') || '{}');
     
@@ -97,27 +94,9 @@ export default function FeedbackForm({ tweetText, prediction }) {
     
     localStorage.setItem('feedbackHistory', JSON.stringify(feedbackHistory));
     
-    // Envoyer au backend
-    try {
-      const response = await fetch(`${apiUrl}/feedback`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(feedbackData),
-      });
-      
-      if (!response.ok) {
-        console.error('Erreur lors de l\'envoi du feedback au serveur:', await response.text());
-        return false;
-      } else {
-        console.log('Feedback envoyé avec succès au serveur');
-        return true;
-      }
-    } catch (error) {
-      console.error('Erreur de connexion lors de l\'envoi du feedback:', error);
-      return false;
-    }
+    // Envoyer au backend en utilisant la fonction importée
+    const result = await sendUserFeedback(feedbackData);
+    return result.success;
   };
   
   // Si pas de prédiction, ne rien afficher
