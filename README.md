@@ -215,7 +215,7 @@ cd app/frontend
 npm run dev  # ou yarn dev
 ```
 
-Pour lancer les deux serveurs simultanément : 
+Pour lancer les deux serveurs simultanément, en mode `local` : 
 
 ```bash
 ./start.sh local
@@ -233,9 +233,7 @@ cd app
 docker compose up -d
 ```
 
-ou 
-
-Pour lancer les deux serveurs simultanément : 
+ou alternativement : 
 
 ```bash
 ./start.sh docker
