@@ -169,59 +169,107 @@ L'application est composée de deux parties principales :
 - Interface responsive et intuitive
 - Mode clair/sombre
 
-### Installation
+### Démarrer l'application Air Paradis
 
-#### Prérequis
+L'application Air Paradis peut être lancée de deux façons différentes : en mode développement local ou via Docker Compose.
+
+#### Mode développement local
+
+##### Prérequis
 
 - Node.js (v18+)
 - npm ou yarn
 - Python 3.8+
 - Environnement virtuel Python (recommandé)
 
-#### Backend (FastAPI)
+##### Installation des dépendances
 
-1. Se déplacer vous dans le répertoire : 
 ```bash
-cd app/fastapi/
-```
-
-2. Créer et activer un environnement virtuel
-```bash
+# Backend (FastAPI)
+cd app/fastapi
 python -m venv venv
-source venv/bin/activate 
-```
-
-2. Installer les dépendances
-```bash
+source venv/bin/activate  # Sous Windows: venv\Scripts\activate
 pip install -r requirements.txt
+
+# Frontend (Next.js)
+cd app/frontend
+npm install  # ou yarn install
 ```
 
-3. Démarrer le serveur FastAPI
+##### Lancement de l'application
+
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+# Démarrer le backend
+cd app/fastapi
+source venv/bin/activate  # Sous Windows: venv\Scripts\activate
+python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+# Dans un autre terminal
+cd app/frontend
+npm run dev  # ou yarn dev
 ```
 
-Le serveur sera accessible à l'adresse : http://localhost:8000
+Pour lancer les deux serveurs simultanément : 
 
-#### Frontend (Next.js)
-
-1. Se déplacer vous dans le répertoire : 
 ```bash
-cd app/frontend/
+./start.sh local
 ```
 
-2. Installer les dépendances
+Le backend sera accessible à l'adresse http://localhost:8000 et le frontend à l'adresse http://localhost:3000.
+
+#### Mode Docker Compose
+
+Pour lancer l'application via Docker Compose (environnement similaire à la production) :
+
 ```bash
-npm install
+# Depuis la racine du projet
+cd app
+docker compose up -d
 ```
 
-3. Démarrer le serveur de développement
+ou 
+
+Pour lancer les deux serveurs simultanément : 
+
 ```bash
-npm run dev
+./start.sh docker
 ```
 
-L'application sera accessible à l'adresse : http://localhost:3000
+Cette commande va construire et démarrer les conteneurs pour le backend et le frontend.
 
+Le backend sera accessible à l'adresse http://localhost:8000 et le frontend à l'adresse http://localhost:3000.
+
+Pour arrêter les conteneurs :
+
+```bash
+docker compose down
+```
+
+Pour visualiser les logs des conteneurs :
+
+```bash
+docker compose logs -f
+```
+
+##### Vérification des variables d'environnement 
+
+```bash
+docker compose exec api sh -c "printenv | sort"
+```
+
+```bash
+docker compose exec frontend sh -c "printenv | sort"
+```
+
+##### Vérification de la connection entre le conteneur `frontend` et `api`
+
+```bash
+docker compose exec frontend sh -c "apk add --no-cache curl && curl -v http://api:8000/health"
+```
+
+#### Note importante
+
+Dans l'environnement Docker, le frontend communique avec le backend via l'URL interne http://api:8000, tandis qu'en développement local, il utilise http://localhost:8000. Cette configuration est gérée automatiquement par Docker Compose.
 
 ## A propos 
 

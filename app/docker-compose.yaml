@@ -1,4 +1,4 @@
-version: '3'
+name: air_paradis
 
 services:
   api:
@@ -10,18 +10,26 @@ services:
     volumes:
       - ./fastapi/model:/app/model
     restart: unless-stopped
-    environment:
-      - MLFLOW_TRACKING_URI=${MLFLOW_TRACKING_URI}
-      - RUN_ID=${RUN_ID}
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    env_file:
+      - ./fastapi/.env
+    networks:
+      - air_paradis_network
 
-  # Service frontend à ajouter plus tard
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "80:80"
-  #   depends_on:
-  #     - api
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    env_file:
+      - ./frontend/.env
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:8000
+    networks:
+      - air_paradis_network
+
+networks:
+  air_paradis_network:
+    driver: bridge

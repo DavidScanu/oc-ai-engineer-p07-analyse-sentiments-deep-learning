@@ -127,13 +127,11 @@ export async function testAppInsightsConnection() {
 // Action pour envoyer le feedback utilisateur
 export async function sendUserFeedback(feedbackData) {
   try {
-    // Récupérer l'URL de l'API depuis les variables d'environnement
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-    
+    // Vérification des données de feedback
     console.log('Feedback préparé:', feedbackData);
     
     // Envoyer au backend
-    const response = await fetch(`${apiUrl}/feedback`, {
+    const response = await fetch(`${API_URL}/feedback`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -153,7 +151,6 @@ export async function sendUserFeedback(feedbackData) {
     return { success: false, error: error.message };
   }
 }
-
 
 // Action pour récupérer des statistiques de modèle (fictif pour la démo)
 export async function getModelStats() {
