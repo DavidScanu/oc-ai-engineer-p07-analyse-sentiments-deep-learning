@@ -8,6 +8,7 @@
 
 > 🎓 OpenClassrooms • Parcours [AI Engineer](https://openclassrooms.com/fr/paths/795-ai-engineer) | 👋 *Étudiant* : [David Scanu](https://www.linkedin.com/in/davidscanu14/)
 
+![People tweeting](images/tweet-cover.png)
 
 ## 📝 Contexte
 
