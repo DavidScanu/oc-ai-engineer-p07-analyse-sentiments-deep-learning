@@ -9,4 +9,4 @@ def test_predict_endpoint(client):
     assert response.status_code == 200
     result = response.json()
     assert "sentiment" in result
-    assert "confidence" in result  # <-- au lieu de "probability"
+    assert "confidence" in result
