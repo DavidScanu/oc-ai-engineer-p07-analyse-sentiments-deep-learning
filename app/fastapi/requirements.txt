@@ -8,9 +8,12 @@ python-dotenv==1.0.1
 dill==0.3.8
 boto3==1.35.0
 requests==2.31.0
-pydantic==2.6.3
+pydantic>=2.11,<3.0
 python-multipart==0.0.9
 nltk==3.8.1
 regex==2023.12.25
 applicationinsights
 opencensus-ext-azure
+starlette==0.36.3
+httpx==0.24.1
+pytest

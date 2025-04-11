@@ -1,6 +1,13 @@
 # Projet 7 - Réalisez une analyse de sentiments grâce au Deep Learning
 
+![Pytest](https://img.shields.io/badge/tests-pytest-blue?logo=pytest&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.19-FF6F00?logo=tensorflow&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-async%20API-009688?logo=fastapi&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-frontend-000000?logo=next.js&logoColor=white)
+
+
 > 🎓 OpenClassrooms • Parcours [AI Engineer](https://openclassrooms.com/fr/paths/795-ai-engineer) | 👋 *Étudiant* : [David Scanu](https://www.linkedin.com/in/davidscanu14/)
+
 
 ## 📝 Contexte
 
@@ -127,7 +134,7 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
    - [Modèle BERT](https://colab.research.google.com/drive/1TFq3selzmDCTReGfa2NvvlaNSRZMhdzY?usp=sharing) : Entraînement d'un modèle `DistilBertForSequenceClassification` (distilbert-base-uncased)
 - [Article de blog complet]()
 
-## Structure du projet
+## 🏛️ Structure du projet
 
 ```
 📦 oc-ai-engineer-p07-analyse-sentiments-deep-learning/
@@ -145,12 +152,11 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
     ┗━━ 📝 04_Modele_BERT.ipynb              # DistilBERT pour analyse de sentiment
 ```
 
-
-## Application de Prédiction de Sentiment pour Tweets (Air Paradis)
+## 💻 Aplication de Prédiction de Sentiment pour Tweets (Air Paradis)
 
 L'application permet d'analyser le sentiment (positif/négatif) des tweets grâce au modèle développé précedemment. Elle utilise le **modèle avancé (Word2vec et LSTM)**.
 
-### Architecture
+### 🏗️ Architecture
 
 L'application est composée de deux parties principales :
 
@@ -159,7 +165,7 @@ L'application est composée de deux parties principales :
 
 ![App Mockup](images/app-mockup.png)
 
-### Fonctionnalités
+### ⭐ Fonctionnalités
 
 - Analyse du sentiment d'un tweet unique
 - Comparaison de plusieurs tweets simultanément
@@ -169,7 +175,7 @@ L'application est composée de deux parties principales :
 - Interface responsive et intuitive
 - Mode clair/sombre
 
-### Démarrer l'application Air Paradis
+### 🚀 Démarrer l'application Air Paradis
 
 L'application Air Paradis peut être lancée de deux façons différentes : en mode développement local ou via Docker Compose.
 
@@ -270,6 +276,51 @@ docker compose exec frontend sh -c "apk add --no-cache curl && curl -v http://ap
 #### Note importante
 
 Dans l'environnement Docker, le frontend communique avec le backend via l'URL interne http://api:8000, tandis qu'en développement local, il utilise http://localhost:8000. Cette configuration est gérée automatiquement par Docker Compose.
+
+### ✅ Tests unitaires de l'API FastAPI – Analyse de sentiment
+
+Ce projet inclut des **tests unitaires** pour valider le bon fonctionnement de l’API FastAPI de prédiction de sentiment. Les tests sont écrits avec **pytest** et vérifient les endpoints principaux de l’API.
+
+#### 🔍 Tests effectués
+
+- `test_health_endpoint`  
+  Vérifie que l'endpoint `/health` renvoie un statut `"ok"` lorsque le modèle est chargé correctement. Ce test s'assure que le cycle de vie de l'application fonctionne (chargement du modèle via `lifespan`).
+
+- `test_predict_endpoint`  
+  Envoie une requête POST à l'endpoint `/predict` avec un exemple de tweet et vérifie que :
+  - le code de réponse est `200`
+  - les clés attendues sont présentes dans la réponse (`sentiment`, `confidence`, `raw_score`)
+
+#### ▶️ Commande pour lancer les tests
+
+Depuis le répertoire contenant les tests (`app/fastapi/tests`), exécute :
+
+```bash
+cd app/fastapi
+python -m pytest tests/test_api.py -v
+```
+
+Le flag `-v` (verbose) permet d'afficher plus de détails sur les tests exécutés.
+
+#### Résultat principal
+
+```
+test_api.py::test_health_endpoint PASSED
+test_api.py::test_predict_endpoint PASSED
+```
+
+| Élément        | Statut  | Remarque |
+|----------------|---------|----------|
+| Tests API      | ✅ OK   | Fonctionnent parfaitement |
+| Modèle chargé  | ✅ OK   | Artefacts bien téléchargés et utilisés |
+| Warnings       | ⚠️ Mineurs | Pas bloquants pour l’usage actuel |
+
+Les deux tests ont été exécutés et ont réussi sans erreur.
+
+Cela signifie que :
+- Notre modèle a bien été téléchargé et chargé.
+- Les endpoints `/health` et `/predict` fonctionnent comme prévu.
+- Le lifespan de l’app est bien géré dans les tests.
 
 ## A propos 
 

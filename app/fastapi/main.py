@@ -10,6 +10,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from pydantic.config import ConfigDict
 from dotenv import load_dotenv
 import mlflow
 import tensorflow as tf
@@ -63,7 +64,8 @@ run_id = os.getenv("RUN_ID")
 MAX_SEQUENCE_LENGTH = 100
 
 # Répertoire local pour sauvegarder les artefacts du modèle
-MODEL_DIR = Path("model")
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "model"
 MODEL_DIR.mkdir(exist_ok=True)
 
 # Variable globale pour stocker le modèle chargé
@@ -149,20 +151,24 @@ app.add_middleware(
 # Modèle de données pour les requêtes
 class TweetRequest(BaseModel):
     text: str
+    model_config = ConfigDict(extra="forbid")
 
 # Modèle de données pour une requête de lot
 class BatchTweetRequest(BaseModel):
     texts: List[str]
+    model_config = ConfigDict(extra="forbid")
 
 # Modèle de données pour une prédiction individuelle
 class SentimentResponse(BaseModel):
     sentiment: str
     confidence: float
     raw_score: float
+    model_config = ConfigDict(extra="forbid")
 
 # Modèle de données pour la réponse par lot
 class BatchSentimentResponse(BaseModel):
     results: List[SentimentResponse]
+    model_config = ConfigDict(extra="forbid")
 
 # Modèle de données pour le feedback utilisateur
 class FeedbackRequest(BaseModel):
@@ -172,6 +178,7 @@ class FeedbackRequest(BaseModel):
     is_correct: bool
     corrected_sentiment: str = ""
     comments: str = ""
+    model_config = ConfigDict(extra="forbid")
 
 
 # Fonction pour télécharger les artefacts depuis MLflow
