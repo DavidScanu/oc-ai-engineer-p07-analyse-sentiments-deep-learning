@@ -4,7 +4,7 @@
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.19-FF6F00?logo=tensorflow&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-async%20API-009688?logo=fastapi&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-frontend-000000?logo=next.js&logoColor=white)
-
+[![Deploy to Heroku](https://github.com/votre-nom/votre-repo/actions/workflows/heroku-deploy.yml/badge.svg)](https://github.com/votre-nom/votre-repo/actions/workflows/heroku-deploy.yml)
 
 > 🎓 OpenClassrooms • Parcours [AI Engineer](https://openclassrooms.com/fr/paths/795-ai-engineer) | 👋 *Étudiant* : [David Scanu](https://www.linkedin.com/in/davidscanu14/)
 
@@ -283,7 +283,7 @@ Dans l'environnement Docker, le frontend communique avec le backend via l'URL in
 
 ### ✅ Tests unitaires de l'API FastAPI – Analyse de sentiment
 
-Ce projet inclut des **tests unitaires** pour valider le bon fonctionnement de l’API FastAPI de prédiction de sentiment. Les tests sont écrits avec **pytest** et vérifient les endpoints principaux de l’API.
+Ce projet inclut des **tests unitaires** pour valider le bon fonctionnement de l’API FastAPI de prédiction de sentiment. Les tests sont écrits avec **pytest** et vérifient les endpoints principaux de l’API. Les script des tests sont stockés dans le dossier `app/fastapi/tests`.
 
 #### 🔍 Tests effectués
 
@@ -297,11 +297,10 @@ Ce projet inclut des **tests unitaires** pour valider le bon fonctionnement de l
 
 #### ▶️ Commande pour lancer les tests
 
-Depuis le répertoire contenant les tests (`app/fastapi/tests`), exécute :
+Depuis la racine du projet, nous executons :
 
 ```bash
-cd app/fastapi
-python -m pytest tests/test_api.py -v
+python -m pytest -v
 ```
 
 Le flag `-v` (verbose) permet d'afficher plus de détails sur les tests exécutés.
@@ -325,6 +324,11 @@ Cela signifie que :
 - Notre modèle a bien été téléchargé et chargé.
 - Les endpoints `/health` et `/predict` fonctionnent comme prévu.
 - Le lifespan de l’app est bien géré dans les tests.
+
+## Déploiement 
+
+- https://air-paradis-sentiment-api-cb9657408b38.herokuapp.com/
+- https://git.heroku.com/air-paradis-sentiment-api.git
 
 ## A propos 
 

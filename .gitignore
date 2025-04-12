@@ -5,6 +5,8 @@ content/pretrained-embeddings/
 content/pretrained-embeddings/*
 app/fastapi/model/
 
+heroku_env.sh
+
 
 # From Next.js App
 # This is a template for a .gitignore file for a Next.js project.

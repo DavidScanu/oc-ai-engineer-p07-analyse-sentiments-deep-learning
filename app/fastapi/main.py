@@ -403,7 +403,15 @@ async def root():
 async def health_check():
     """Endpoint de vérification de santé."""
     if model_pack is None:
-        return {"status": "erreur", "message": "Le modèle n'est pas chargé."}
+        return {
+            "status": "erreur",
+            "message": "Le modèle n'est pas chargé.",
+            "environment_variables": {
+                "MLFLOW_TRACKING_URI": os.environ.get("MLFLOW_TRACKING_URI", "Not set"),
+                "RUN_ID": os.environ.get("RUN_ID", "Not set"),
+                "APPINSIGHTS_INSTRUMENTATION_KEY": "Configured" if "APPINSIGHTS_INSTRUMENTATION_KEY" in os.environ else "Not set"
+            }
+        }
     return {"status": "ok", "message": "Le modèle est chargé et prêt pour les prédictions."}
 
 @app.get("/info")
