@@ -29,9 +29,26 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
 # Téléchargez les ressources NLTK nécessaires
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
+# nltk.download('punkt')
+# nltk.download('stopwords')
+# nltk.download('wordnet')
+
+
+def ensure_nltk_resources():
+    import nltk
+    from nltk.data import find
+    resources = {
+        'punkt': 'tokenizers/punkt',
+        'stopwords': 'corpora/stopwords',
+        'wordnet': 'corpora/wordnet'
+    }
+
+    for key, path in resources.items():
+        try:
+            find(path)
+        except LookupError:
+            nltk.download(key)
+
 
 
 # Forcer TensorFlow à utiliser uniquement le CPU
@@ -262,6 +279,7 @@ def custom_preprocess_tweet(tweet):
     """
     Réimplémentation de la fonction de prétraitement.
     """
+    ensure_nltk_resources()
     # Vérifier si le tweet est une chaîne de caractères
     if not isinstance(tweet, str):
         return ""

@@ -1,0 +1,17 @@
+# app/fastapi/.slugignore
+__pycache__/
+*.keras
+*.pickle
+*.dill
+*.h5
+*.log
+*.csv
+*.tsv
+*.json
+*.ipynb
+tests/
+nltk_data/
+model/
+data/
+docs/
+notebooks/
