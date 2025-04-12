@@ -325,10 +325,97 @@ Cela signifie que :
 - Les endpoints `/health` et `/predict` fonctionnent comme prévu.
 - Le lifespan de l’app est bien géré dans les tests.
 
-## Déploiement 
+## 🚀 Déploiement sur Heroku
 
-- https://air-paradis-sentiment-api-cb9657408b38.herokuapp.com/
-- https://git.heroku.com/air-paradis-sentiment-api.git
+L'API FastAPI d'analyse de sentiment est déployée sur Heroku en utilisant un **pipeline CI/CD** avec **GitHub Actions**.
+
+### Liens de déploiement
+
+- **URL de l'API**: [https://air-paradis-sentiment-api-cb9657408b38.herokuapp.com](https://air-paradis-sentiment-api-cb9657408b38.herokuapp.com/docs)
+- **Repository Heroku**: [https://git.heroku.com/air-paradis-sentiment-api.git](https://git.heroku.com/air-paradis-sentiment-api.git)
+
+### Configuration du déploiement
+
+Le déploiement utilise les technologies suivantes:
+
+- **Hébergement**: Heroku (région Europe)
+- **CI/CD**: GitHub Actions
+
+### Pipeline de déploiement continu
+
+Le déploiement est entièrement automatisé grâce à GitHub Actions:
+
+1. **Tests automatisés**: Exécution des tests unitaires pour valider le bon fonctionnement de l'API.
+2. **Déploiement**: Si les tests réussissent, l'application est déployée automatiquement sur Heroku.
+
+## Configuration de GitHub Actions avec les secrets pour le déploiement sur Heroku
+
+### Étape 1: Creation d'un workflow GitHub Actions
+
+1. Dans votre dépôt GitHub, créez un dossier `.github/workflows/`.
+2. Créez un fichier `heroku-deploy.yml`.
+
+## Étape 2: Configuration des secrets GitHub
+
+1. Dans notre dépôt GitHub, nous allons dans "Settings" > "Secrets and variables" > "Actions"
+2. Nous cliquons sur "New repository secret"
+3. Nous ajoutons les secrets suivants:
+
+| Nom du secret | Description | Comment l'obtenir |
+|---------------|-------------|-------------------|
+| `HEROKU_API_KEY` | Clé API Heroku | Dashboard Heroku > Account settings > API Key |
+| `HEROKU_EMAIL` | Email du compte Heroku | Votre email de connexion Heroku |
+| `MLFLOW_TRACKING_URI` | URI du serveur MLflow | URL de votre serveur MLflow |
+| `RUN_ID` | ID du run MLflow | Via l'interface MLflow ou les logs |
+| `AWS_ACCESS_KEY_ID` | Clé d'accès AWS (si nécessaire) | Console AWS IAM |
+| `AWS_SECRET_ACCESS_KEY` | Clé secrète AWS (si nécessaire) | Console AWS IAM |
+| `APPINSIGHTS_INSTRUMENTATION_KEY` | Clé Application Insights | Portail Azure > Application Insights |
+
+
+### Configuration Heroku
+
+L'application utilise les fichiers de configuration suivants:
+
+- **Procfile**: Définit la commande pour démarrer l'API (`web: uvicorn main:app --host=0.0.0.0 --port=${PORT:-8000}`)
+- **runtime.txt**: Spécifie la version Python (`python-3.10.12`)
+- **requirements.txt**: Liste toutes les dépendances nécessaires
+
+#### Variables d'environnement
+
+Les variables d'environnement suivantes sont configurées sur Heroku:
+
+- `MLFLOW_TRACKING_URI`: URI du serveur MLflow
+- `RUN_ID`: Identifiant du run MLflow du modèle déployé
+- `APPINSIGHTS_INSTRUMENTATION_KEY`: Clé pour Azure Application Insights
+
+#### Surveillance et monitoring
+
+- Les logs de l'application peuvent être consultés via la CLI Heroku:
+
+```bash
+heroku logs --tail -a air-paradis-sentiment-api
+```
+
+- Les performances, erreurs et feedback utilisateur sont suivis dans **Azure Application Insights**.
+- Des alertes sont configurées pour signaler les anomalies (comme un nombre élevé de prédictions incorrectes)
+
+### Vérification du déploiement
+
+Pour vérifier que l'API est correctement déployée et fonctionne, vous pouvez exécuter:
+
+```bash
+# Vérifier l'état de santé de l'API
+curl https://air-paradis-sentiment-api-cb9657408b38.herokuapp.com/health
+
+# Tester l'endpoint de prédiction avec un exemple
+curl -X 'POST' \
+  'https://air-paradis-sentiment-api-cb9657408b38.herokuapp.com/predict' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "text": "I love Air Paradis! #xoxo"
+}'
+```
 
 ## A propos 
 
