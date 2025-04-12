@@ -16,7 +16,7 @@ Cette API, réalisé avec FastAPI, permet de prédire le sentiment (positif ou n
 - Accès à un serveur MLflow
 - Identifiants AWS si les artefacts sont stockés sur S3
 - Docker et Docker Compose
-
+  
 ## Configuration
 
 Créez un fichier `.env` à la racine du projet avec les variables suivantes :
