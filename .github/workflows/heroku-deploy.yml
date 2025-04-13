@@ -48,6 +48,3 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           appdir: "app/fastapi"
           region: "eu"
-      - name: List final app contents before slug compression
-        run: du -h -d 2 . | sort -hr | head -n 30
-        
