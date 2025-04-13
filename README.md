@@ -1,10 +1,10 @@
 # Projet 7 - Réalisez une analyse de sentiments grâce au Deep Learning
 
-![Pytest](https://img.shields.io/badge/tests-pytest-blue?logo=pytest&logoColor=white)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.19-FF6F00?logo=tensorflow&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-async%20API-009688?logo=fastapi&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-frontend-000000?logo=next.js&logoColor=white)
-[![Deploy to Heroku](https://github.com/votre-nom/votre-repo/actions/workflows/heroku-deploy.yml/badge.svg)](https://github.com/votre-nom/votre-repo/actions/workflows/heroku-deploy.yml)
+[![Pytest](https://img.shields.io/github/actions/workflow/status/DavidScanu/oc-ai-engineer-p07-analyse-sentiments-deep-learning/heroku-deploy.yml?label=pytest&logo=pytest&logoColor=white)](https://github.com/DavidScanu/oc-ai-engineer-p07-analyse-sentiments-deep-learning/actions/workflows/heroku-deploy.yml)
+[![Deploy to Heroku](https://github.com/DavidScanu/oc-ai-engineer-p07-analyse-sentiments-deep-learning/actions/workflows/heroku-deploy.yml/badge.svg)](https://github.com/DavidScanu/oc-ai-engineer-p07-analyse-sentiments-deep-learning/actions/workflows/heroku-deploy.yml)
 
 > 🎓 OpenClassrooms • Parcours [AI Engineer](https://openclassrooms.com/fr/paths/795-ai-engineer) | 👋 *Étudiant* : [David Scanu](https://www.linkedin.com/in/davidscanu14/)
 
