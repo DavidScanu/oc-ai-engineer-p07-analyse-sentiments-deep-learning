@@ -1,4 +1,6 @@
 # Custom .gitignore for the project
+scanu-david-01-api-20250306.md
+api.md
 
 content/
 content/pretrained-embeddings/
