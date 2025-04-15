@@ -83,29 +83,31 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 
 ## 📦 Livrables
 
-1. **Dépôt GitHub** contenant :
-   - Code complet : [GitHub Repository](https://github.com/DavidScanu/oc-ai-engineer-p07-analyse-sentiments-deep-learning)
+1. [Dépôt GitHub](https://github.com/DavidScanu/oc-ai-engineer-p07-analyse-sentiments-deep-learning)
+   - Fichier `README.md` d'explications détaillées
    - [Notebooks des modélisations](notebooks) avec tracking MLFlow pour les trois approches
    - [Code de déploiement de l'API (FastAPI)](app/fastapi)
    - [Code de l'interface utilisateur (Next.js)](app/frontend)
-   - Fichier `README.md` explicatif
    - [Documentation supplémentaire](/documentation) contenant :
      -  [Article de blog](documentation/blog.md)
      -  [Guide de dépoilement sur Heroku](documentation/deploy-api-on-heroku.md)
      -  [Guide Azure Application Insights](documentation/guide-app-insights.md)
 
-3. **Scripts de modélisation** pour les trois approches
-   - [Notebooks des trois approches de modélisation](notebooks) 
+3. [Notebooks des trois approches de modélisation](notebooks)
    - Intégration avec MLFlow pour le tracking et l'enregistrement des modèles
+   - [Analyse exploratoire des données](notebooks/scanu-david-01-notebook-analyse-exploratoire-20250306.ipynb) : Analyse des données du jeu de données "Sentiment140"
+   - [Modèle simple](notebooks/scanu-david-02-notebook-modele-simple-20250306.ipynb) : Bag Of Words + 4 Classificateurs
+   - [Modèle avancé](notebooks/scanu-david-03-notebook-modele-avance-20250306.ipynb) : Word2vec/GloVe + LSTM (utilisé par l'API en production)
+   - [Modèle BERT](https://colab.research.google.com/drive/1TFq3selzmDCTReGfa2NvvlaNSRZMhdzY?usp=sharing) : Entraînement d'un modèle `DistilBertForSequenceClassification` (distilbert-base-uncased)
 
-4. **API de prédiction** (FastAPI)
+4. [API de prédiction (FastAPI)](app/fastapi)
    - Exposant le **Modèle avancé** (LSTM) via FastAPI
    - Mise en place d'un pipeline de déploiement continu (CI/CD)
    - Test automatisés
    - Déploiement sur Heroku (Lien volontaire indisponible sur cette page car il n'est pas protégé par un mécanisme d'authentification)
    - [Guide d'utilisation de l'API FastAPI](app/fastapi/README.md)
 
-5. **Interface Frontend** (Next.js)
+5. [Interface frontend (Next.js)](app/frontend)
    - Permettant la saisie d'un tweet
    - Affichant la prédiction et demandant un feedback à l'utilisateur
    - Envoyant une trace à **Application Insight** en cas de non-validation
@@ -132,19 +134,6 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 - **Frontend** : Next.js / React
 - **Monitoring** : Azure Application Insight
 - **Traitement texte** : NLTK, Word Embeddings
-
-
-## 📃 Documents et Notebooks
-
-- [Guide d'utilisation de l'API FastAPI](app/fastapi/README.md) : API FastAPI qui expose un modèle de deep learning pour l'analyse de sentiment
-- [Guide d'utilisation du frontend Next.JS](app/frontend/README.md) : Application Next.js avec Bootstrap pour l'interface utilisateur
-- [Guide de Monitoring pour Air Paradis](documentation/guide-app-insights.md) : Mise en place du feedback utilisateur et des alertes avec Azure Application insights
-- **Notebooks** :
-   - [Analyse exploratoire des données](notebooks/scanu-david-01-notebook-analyse-exploratoire-20250306.ipynb) : Analyse des données du jeu de données "Sentiment140"
-   - [Modèle simple](notebooks/scanu-david-02-notebook-modele-simple-20250306.ipynb) : Bag Of Words + Classificateur
-   - [Modèle avancé](notebooks/scanu-david-03-notebook-modele-avance-20250306.ipynb) : Word2vec + LSTM (utilisé par l'API en production)
-   - [Modèle BERT](https://colab.research.google.com/drive/1TFq3selzmDCTReGfa2NvvlaNSRZMhdzY?usp=sharing) : Entraînement d'un modèle `DistilBertForSequenceClassification` (distilbert-base-uncased)
-- [Article de blog complet]()
 
 ## 🏛️ Structure du projet
 
