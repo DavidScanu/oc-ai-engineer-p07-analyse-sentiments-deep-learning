@@ -2,7 +2,7 @@
 
 Cette interface utilisateur permet d'analyser le sentiment (positif/négatif) des tweets grâce à un modèle d'intelligence artificielle. Elle a été développée dans le cadre d'un projet MLOps pour la compagnie **Air Paradis** afin d'anticiper les bad buzz sur les réseaux sociaux.
 
-![App Mockup](images/app-mockup-02-transparent.png)
+![App Mockup](../../images/app-mockup-02-transparent.png)
 
 ## Architecture
 
