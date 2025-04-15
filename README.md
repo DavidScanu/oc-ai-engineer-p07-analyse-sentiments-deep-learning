@@ -54,14 +54,14 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 ## 🗓️ Plan de travail
 
 1. **Exploration et préparation des données**
-   - Acquisition des données de tweets Open Source
+   - Acquisition des données de tweets *Sentiment140*
    - Analyse exploratoire et prétraitement des textes
 
 2. **Développement des modèles**
-   - Implémentation du modèle classique (régression logistique)
-   - Conception d'un modèle avancé utilisant les word embeddings et un réseau LSTM
-   - Conception d'un modèle BERT pour l'analyse de sentiments
-   - Comparaison des performances via MLFlow
+   - Implémentation du** modèle classique** (régression logistique)
+   - Conception d'un **modèle avancé** utilisant les word embeddings et un **réseau LSTM**
+   - Conception d'un **modèle BERT** pour l'analyse de sentiments
+   - Comparaison des performances via **MLFlow**
 
 3. **Mise en place de la démarche MLOps**
    - Configuration de MLFlow pour le tracking des expérimentations
@@ -84,34 +84,40 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
 ## 📦 Livrables
 
 1. **Dépôt GitHub** contenant :
-   - Notebooks des modélisations avec tracking MLFlow pour les trois approches
-   - Code de déploiement de l'API (FastAPI)
-   - Code de l'interface utilisateur (Next.js)
-   - Fichier README explicatif et requirements.txt
-   - Lien: [GitHub Repository](https://github.com/DavidScanu/oc-ai-engineer-p07-analyse-sentiments-deep-learning)
+   - Code complet : [GitHub Repository](https://github.com/DavidScanu/oc-ai-engineer-p07-analyse-sentiments-deep-learning)
+   - [Notebooks des modélisations](notebooks) avec tracking MLFlow pour les trois approches
+   - [Code de déploiement de l'API (FastAPI)](app/fastapi)
+   - [Code de l'interface utilisateur (Next.js)](app/frontend)
+   - Fichier `README.md` explicatif
+   - [Documentation supplémentaire](/documentation) contenant :
+     -  [Article de blog](documentation/blog.md)
+     -  [Guide de dépoilement sur Heroku](documentation/deploy-api-on-heroku.md)
+     -  [Guide Azure Application Insights](documentation/guide-app-insights.md)
 
-2. **Scripts de modélisation** pour les trois approches
+3. **Scripts de modélisation** pour les trois approches
+   - [Notebooks des trois approches de modélisation](notebooks) 
    - Intégration avec MLFlow pour le tracking et l'enregistrement des modèles
 
-3. **API de prédiction** (FastAPI)
-   - Exposant le **Modèle avancé** via FastAPI
+4. **API de prédiction** (FastAPI)
+   - Exposant le **Modèle avancé** (LSTM) via FastAPI
    - Mise en place d'un pipeline de déploiement continu (CI/CD)
    - Test automatisés
-   - Déploiement sur Heroku
-   - Lien: [API Prediction Air Paradis](https://lien-vers-api.herokuapp.com)
+   - Déploiement sur Heroku (Lien volontaire indisponible sur cette page car il n'est pas protégé par un mécanisme d'authentification)
+   - [Guide d'utilisation de l'API FastAPI](app/fastapi/README.md)
 
-4. **Interface Frontend** (Next.js)
+5. **Interface Frontend** (Next.js)
    - Permettant la saisie d'un tweet
    - Affichant la prédiction et demandant un feedback à l'utilisateur
    - Envoyant une trace à **Application Insight** en cas de non-validation
+   - [Guide d'utilisation du frontend Next.JS](app/frontend/README.md)
 
-5. **Article de blog** (1500-2000 mots)
+6. [Article de blog](https://dev.to/davidscanu/analyse-de-sentiments-de-tweets-grace-au-deep-learning-une-approche-mlops-3ib7)
    - Comparaison des trois approches de modélisation
    - Présentation de la démarche MLOps mise en œuvre
    - Conception et déploiement de l'API de prédiction et de l'interface utilisateur
    - Analyse du suivi de performance en production
 
-6. **Support de présentation**
+7. [Support de présentation](https://docs.google.com/presentation/d/1PY7JPx5ZqY8a9jotuqgLxoTO2WuPdZQvD-EKWPc6k8g/edit?usp=sharing)
    - Méthodologie et résultats des différents modèles
    - Visualisations MLFlow
    - Preuves du pipeline CI/CD (commits, tests unitaires)
@@ -331,8 +337,7 @@ L'API FastAPI d'analyse de sentiment est déployée sur Heroku en utilisant un *
 
 ### Liens de déploiement
 
-- **URL de l'API**: [https://air-paradis-sentiment-api-cb9657408b38.herokuapp.com](https://air-paradis-sentiment-api-cb9657408b38.herokuapp.com/docs)
-- **Repository Heroku**: [https://git.heroku.com/air-paradis-sentiment-api.git](https://git.heroku.com/air-paradis-sentiment-api.git)
+- **URL de l'API**: *Volontairement indisponible sur cette page car l'API ne dispose pas d'un mécanisme d'authentification pour le protéger*.
 
 ### Configuration du déploiement
 
@@ -371,7 +376,6 @@ Le déploiement est entièrement automatisé grâce à GitHub Actions:
 | `AWS_SECRET_ACCESS_KEY` | Clé secrète AWS (si nécessaire) | Console AWS IAM |
 | `APPINSIGHTS_INSTRUMENTATION_KEY` | Clé Application Insights | Portail Azure > Application Insights |
 
-
 ### Configuration Heroku
 
 L'application utilise les fichiers de configuration suivants:
@@ -401,7 +405,7 @@ heroku logs --tail -a air-paradis-sentiment-api
 
 ### Vérification du déploiement
 
-Pour vérifier que l'API est correctement déployée et fonctionne, vous pouvez exécuter:
+Pour vérifier que l'API est correctement déployée et fonctionne, nous pouvons exécuter:
 
 ```bash
 # Vérifier l'état de santé de l'API
