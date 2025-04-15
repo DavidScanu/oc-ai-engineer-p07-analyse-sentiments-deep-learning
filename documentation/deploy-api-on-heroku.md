@@ -374,6 +374,103 @@ Si votre application dépasse la limite de taille de Heroku (500 MB):
 2. Stockez le modèle externalement et téléchargez-le au démarrage
 3. Passez à un niveau de service Heroku plus élevé
 
+### 6.4 Erreur : "Le modèle n'est pas chargé"
+
+Si vous recevez cette réponse en appelant l'endpoint `/health` :
+
+```json
+{
+  "detail": {
+    "status": "erreur",
+    "message": "Le modèle n'est pas chargé. Vérifiez que les artefacts ont bien été téléchargés depuis MLflow.",
+    "environment_variables": {
+      "MLFLOW_TRACKING_URI": "...",
+      "RUN_ID": "...",
+      "APPINSIGHTS_INSTRUMENTATION_KEY": "Configured"
+    }
+  }
+}
+```
+
+Suivez ces étapes pour résoudre le problème :
+
+1. **Vérifiez que le serveur MLflow est en cours d'exécution**
+   - Assurez-vous que votre Codespace GitHub est actif
+   - Vérifiez que le serveur MLflow fonctionne sur le port 5001
+   - Confirmez que le port forwarding est configuré et visible publiquement
+
+2. **Vérifiez l'accessibilité de l'URL MLflow**
+   - Testez l'URL du serveur MLflow dans un navigateur
+   - Assurez-vous que l'URL est accessible depuis l'extérieur de votre Codespace
+
+3. **Vérifiez les variables d'environnement sur Heroku**
+   ```bash
+   heroku config --app air-paradis-sentiment-api
+   ```
+   - Confirmez que MLFLOW_TRACKING_URI pointe vers la bonne URL
+   - Vérifiez que RUN_ID correspond à un run existant dans MLflow
+
+4. **Consultez les logs Heroku pour identifier les erreurs spécifiques**
+   ```bash
+   heroku logs --tail --app air-paradis-sentiment-api
+   ```
+   - Cherchez les erreurs liées à MLflow ou au chargement du modèle
+   - Vérifiez les codes d'erreur HTTP (404, 500, etc.)
+
+5. **Redémarrez l'application Heroku**
+   ```bash
+   heroku restart --app air-paradis-sentiment-api
+   ```
+   - Cette action force le redémarrage de l'application et tente à nouveau de charger le modèle
+
+6. **Solutions pour les problèmes persistants**
+   - Si le serveur MLflow est temporairement inaccessible, attendez et réessayez
+   - Si le RUN_ID n'existe plus, mettez à jour la variable d'environnement avec un ID valide
+   - Envisagez de migrer vers une solution de stockage plus permanente (AWS S3, Azure Blob Storage)
+
+### Amélioration de la robustesse du déploiement
+
+Pour éviter ces problèmes à l'avenir, considérez ces options :
+
+1. **Stockage du modèle dans S3 plutôt que via MLflow**
+   - Téléchargez les artefacts du modèle localement
+   - Chargez-les dans un bucket S3
+   - Mettez à jour l'application pour charger le modèle depuis S3
+
+2. **Mise en place d'un système de cache**
+   - Stockez une copie du modèle dans le système de fichiers de l'application
+   - Implémentez une logique de fallback si MLflow est inaccessible
+
+3. **Monitoring et alertes**
+   - Configurez des alertes pour être notifié en cas de problème de chargement du modèle
+   - Utilisez Application Insights pour surveiller les performances et la disponibilité
+
+### Commandes CLI utiles pour le débogage
+
+```bash
+# Installer la CLI Heroku
+curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
+# Se connecter à Heroku avec l'email et la clé API (pour les comptes avec MFA activée)
+heroku login -i
+# Quand l'invite apparaît, entrez votre email
+# À l'invite du mot de passe, entrez votre clé API (et non votre mot de passe)
+# Vous pouvez générer ou récupérer une clé API depuis https://dashboard.heroku.com/account
+
+# Alternative: définir la clé API comme variable d'environnement
+export HEROKU_API_KEY=votre-token-api
+heroku auth:whoami
+
+# Vérifier les variables d'environnement
+heroku config --app air-paradis-sentiment-api
+
+# Consulter les logs en temps réel
+heroku logs --tail --app air-paradis-sentiment-api
+
+# Redémarrer l'application
+heroku restart --app air-paradis-sentiment-api
+```
+
 ## 7. Ressources supplémentaires
 
 - [Documentation Heroku pour Python](https://devcenter.heroku.com/categories/python-support)
