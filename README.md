@@ -58,7 +58,7 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
    - Analyse exploratoire et prétraitement des textes
 
 2. **Développement des modèles**
-   - Implémentation du** modèle classique** (régression logistique)
+   - Implémentation du **modèle classique** (régression logistique)
    - Conception d'un **modèle avancé** utilisant les word embeddings et un **réseau LSTM**
    - Conception d'un **modèle BERT** pour l'analyse de sentiments
    - Comparaison des performances via **MLFlow**
