@@ -398,11 +398,11 @@ Pour vérifier que l'API est correctement déployée et fonctionne, nous pouvons
 
 ```bash
 # Vérifier l'état de santé de l'API
-curl https://air-paradis-sentiment-api-cb9657408b38.herokuapp.com/health
+curl https://air-paradis-sentiment-api.herokuapp.com/health
 
 # Tester l'endpoint de prédiction avec un exemple
 curl -X 'POST' \
-  'https://air-paradis-sentiment-api-cb9657408b38.herokuapp.com/predict' \
+  'https://air-paradis-sentiment-api.herokuapp.com/predict' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
