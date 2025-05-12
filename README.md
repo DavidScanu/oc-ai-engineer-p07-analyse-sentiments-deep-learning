@@ -153,7 +153,7 @@ Ces compétences sont essentielles pour ma future carrière d'ingénieur IA, me 
     ┗━━ 📝 04_Modele_BERT.ipynb              # DistilBERT pour analyse de sentiment
 ```
 
-## 💻 Aplication de Prédiction de Sentiment pour Tweets (Air Paradis)
+## 💻 Application de Prédiction de Sentiment pour Tweets (Air Paradis)
 
 L'application permet d'analyser le sentiment (positif/négatif) des tweets grâce au modèle développé précedemment. Elle utilise le **modèle avancé (Word2vec et LSTM)**.
 
